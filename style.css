@@ -430,9 +430,12 @@ font a{
     transition: transform 1s;
 }
 .pete-butAngry{
-    margin-top: 40px;
+     margin-top: 40px;
     margin-bottom: 40px;
-    margin-left: 470px;
+     display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
 }
 
 
