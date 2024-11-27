@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+   
+    <title>
+    Transactions - TradinGo
+    </title>
+    <link rel="stylesheet" href="specialstyle.css">
+
+    <script src="
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js
+    "></script>
+    <link href="
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css
+    " rel="stylesheet">
+    
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+        
+<!--- header ni boy --->
+<div class="container">
+    <div class="navbar">
+        <div>
+            <!---logo put maya here --->
+            <img src="images/LogoForNavBar.png"  width="125px" >
+        </div>
+        <nav>
+            <ul id="MenuItems">
+                <li><a href="TradinGo.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+               <li><a href="Profile.html">Profile</a></li>
+               <li><a href="MessageList.html">Messages</a></li>         
+              
+                <li><a href="about.html">About</a></li>
+    
+            </ul>
+        </nav>
+        <div class="carticonPad">
+        <img id="TradeIcon" src="images/cartIcon.png" width="40px" height="40px">
+       
+    </div>
+    <i id="BellIcon" class="fa fa-bell" style="font-size:24px"></i>
+    <img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
+     </div>
+</div>
+
+</head>
+
+<style>
+      h2{
+        text-align: center;
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+  table {
+    text-align: center;
+    border-collapse: collapse;
+  width: 80%; /* Adjust this value to your liking */
+  margin: 0 auto; /* Centers the table horizontally */
+  border-radius: 10px; /* Rounds the table border */
+  overflow: hidden; /* Ensures that the rounded corners are visible */
+  table-layout: fixed; /* Makes each <tr> element the same width */
+}
+
+th, td {
+    text-align: center;
+  padding: 12px;
+  border: 1px solid #ddd;
+  width: auto; /* Reset the width to auto, since we're using fixed layout */
+}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
+
+</style>
+<body>
+
+
+
+<h2 class="Pend">Your Transactions</h2>  
+
+    <table class="table" border="2" style="border-collapse:collapse;">
+        <thead>
+          <tr>
+           
+            <th scope="col">Transaction No.</th>
+            <th scope="col">Your Item</th>
+            <th scope="col">Traded Items</th>
+            <th scope="col">Trader</th>
+
+          </tr>
+        </thead>
+      
+        <tbody id="productsDiv" class="container"> 
+
+
+        </tbody>
+   
+      </table>
+
+        <script>
+            var MenuItems = document.getElementById("MenuItems");
+        
+            MenuItems.style.maxHeight = "0px";
+        
+            function menutoggle(){
+                if(MenuItems.style.maxHeight == "0px"){
+                    MenuItems.style.maxHeight = "200px";
+                }
+                else{
+                    MenuItems.style.maxHeight = "0px";
+                }
+            }
+        </script>
+    
+
+<script type="module">
+let userUid;
+let DisplayName;
+
+    function getShortTitle(title){
+        if(title.length > 49) title.substring(0, 47);
+        else return title;
+        return title + "...";
+    }
+
+//imports
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyB9XhRzkpjkyuAZLaMSxaLQJs7DwwNESmY",
+    authDomain: "tradingo-824d6.firebaseapp.com",
+    databaseURL: "https://tradingo-824d6-default-rtdb.firebaseio.com",
+    projectId: "tradingo-824d6",
+    storageBucket: "tradingo-824d6.appspot.com",
+    messagingSenderId: "273813724823",
+    appId: "1:273813724823:web:5af639aa92782227fe53d2",
+    measurementId: "G-K74SN99P90"
+  };
+
+  const app = initializeApp(firebaseConfig);
+
+  import { getAuth, signInWithEmailAndPassword,  signOut, updateProfile, sendSignInLinkToEmail, onAuthStateChanged }
+   from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js";
+
+   import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-analytics.js";
+
+  import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL}
+  from"https://www.gstatic.com/firebasejs/9.13.0/firebase-storage.js"
+
+  import { getDatabase, get,child, set, ref, update, remove}
+   from "https://www.gstatic.com/firebasejs/9.13.0/firebase-database.js";
+
+ const realdb = getDatabase();
+  const dbref = ref(realdb);
+    const auth = getAuth(app);
+
+
+var OuterDiv = document.getElementById('productsDiv');
+var ArrayOfProducts = [];
+window.addEventListener('load', GetAllProducts);
+
+function GetAllProducts() {
+    onAuthStateChanged(auth, (user) => {
+        userUid = user.uid;
+ console.log(userUid);
+
+    get(child(dbref, 'users/' + userUid + '/Trades' + '/Finished_trades' ))
+    .then((snapshot) =>{
+        console.log(snapshot.val());
+        snapshot.forEach(prod =>{
+ArrayOfProducts.push(prod.val());
+        });
+      
+
+        AddAllProducts();
+    })
+})
+}
+
+
+onAuthStateChanged(auth, (user) => {
+ if (user  == null) {
+   window.location = 'account.html';
+ } else {
+ 
+ }
+});
+document.getElementById('TradeIcon').addEventListener('click', function() {
+ 
+ onAuthStateChanged(auth, (user) => {
+ if (user  == null) {
+   window.location = 'account.html';
+ } else {
+  window.location = 'Transactions.html';
+ }
+});
+});
+
+
+document.getElementById('BellIcon').addEventListener('click', function() {
+ onAuthStateChanged(auth, (user) => {
+ if (user  == null) {
+   window.location = 'account.html';
+ } else {
+  window.location = 'Notifications.html';
+ }
+});
+});
+
+function AddAllProducts(){
+    let i = 0;
+
+    ArrayOfProducts.forEach(prod =>{
+AddAProduct(prod, i++);
+    });
+    AssignAllEvents();
+    AssignEvents();
+}
+// Get the full URL of the current page
+var url = window.location.href;
+
+// Get the path of the current page (excluding the protocol and domain)
+var path = window.location.pathname;
+
+// Get the folder that the file is in (excluding the file name)
+var folder = path.substring(0, path.lastIndexOf('/'));
+
+// Output the folder to the console
+console.log(folder);
+
+function AddAProduct(Transaction, index){
+   
+
+    onAuthStateChanged(auth, (user) => {
+        userUid = user.uid;
+ console.log(userUid);
+
+get(child(dbref, 'users/' + userUid + '/displayName' ))
+    .then((snapshot) =>{
+        
+       DisplayName = snapshot.val();
+       console.log(snapshot.val());
+       })
+})
+
+
+    let html = 
+    `
+    <td>${Transaction.TransActNo}</td>
+      <td>${Transaction.ProductTraded}</td>
+    <td class="titleProd" id="title-`+ index+`"> `+ getShortTitle(Transaction.ProductTitle) +` </td>
+      <td>${Transaction.Trader}</td>
+
+      
+    `
+// 
+    let newProd = document.createElement("tr");
+    newProd.classList.add('productcard');
+    newProd.innerHTML = html;
+    OuterDiv.append(newProd);
+
+}
+
+function GenerateStockLabel(stock){
+let stocklabel = document.createElement('h5');
+stocklabel.classList.add('stock');
+
+if (stock > 0){
+    stocklabel.innerHTML='In stock';
+    stocklabel.classList.add('text-success');
+}
+else{
+    stocklabel.innerHTML='Out of stock';
+    stocklabel.classList.add('text-warning');
+}
+return stocklabel.outerHTML;
+}
+
+function GetUl(array){
+    let ul = document.createElement("ul");
+    ul.classList.add('points');
+
+    array.forEach(element => {
+let li = document.createElement("li");
+li.innerText=element;
+ul.append(li);
+    });
+    return ul.outerHTML;
+}
+
+function GetProductIndex(id){
+    var indstart = id.indexOf('-') + 1;
+    var indend = id.length;
+    return Number(id.substring(indstart, indend));
+}
+
+/*
+ProductTitle
+ProductTraded
+Trader
+TraderCreatorUid
+TraderUid
+TransActNo
+Uploader
+*/
+
+// para kung accept
+
+function accept(event){
+
+console.log("OSHET MINECRAFT");
+var index = GetProductIndex(event.target.id);
+localStorage.Product = JSON.stringify(ArrayOfProducts[index]);
+console.log(localStorage.Product); 
+let product = localStorage.Product;
+            product=JSON.parse(product);
+
+//edit pani erp
+
+            let Trader1 = product.TraderUid;
+        let Trader2 = product.TraderCreatorUid;
+        let DisUser = product.TraderCreatorUid;
+            let penduid = product.TransActNo
+
+        //let ProdDel = product.WantItem;
+       // let Notif = product.NotificationNo;
+    let randomString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+update(ref(realdb,'users/' + Trader1 + '/Trades'+ '/Finished_trades' + '/Finished:' + randomString),{ //mao ni si sender
+    Trader:product.Trader,
+Uploader:product.Uploader,
+TraderUid: product.TraderUid,
+TransActNo: randomString,
+TraderCreatorUid: product.TraderCreatorUid,
+ProductTraded: product.ProductTraded,
+ProductTitle: product.ProductTitle
+    });
+    update(ref(realdb,'users/' + Trader2 + '/Trades'+ '/Finished_trades' + '/Finished:' + randomString),{ //mao ni si uploader
+    Trader:product.Trader,
+Uploader:product.Uploader,
+TraderUid: product.TraderUid,
+TransActNo: randomString,
+TraderCreatorUid: product.TraderCreatorUid,
+ProductTraded: product.ProductTitle,
+ProductTitle: product.ProductTraded
+    }); 
+  
+remove(child(dbref, 'users/' + DisUser + '/Trades'+ '/Pending_Trade' + '/Pending'+ ':' + penduid))
+   .then((snapshot) =>{
+       Swal.fire('Trade Success')
+       console.log(DisUser);
+       console.log(product.NotificationNo);
+       setTimeout(function() {
+  console.log("3 seconds have passed.");
+  window.location.reload();
+}, 3000);
+       });
+
+}
+//para kung reject
+function reject(event){
+console.log("NoSHet MINECRAFT");
+var index = GetProductIndex(event.target.id);
+localStorage.Product = JSON.stringify(ArrayOfProducts[index]);
+console.log(localStorage.Product);
+let product = localStorage.Product;
+            product=JSON.parse(product);
+
+            let DisUser = product.TraderCreatorUid;
+            let penduid = product.TransActNo
+
+remove(child(dbref, 'users/' + DisUser + '/Trades'+ '/Pending_Trade' + '/Pending'+ ':' + penduid))
+   .then((snapshot) =>{
+       Swal.fire('Trade Declined')
+       console.log(DisUser);
+       console.log(product.NotificationNo);
+       setTimeout(function() {
+  console.log("3 seconds have passed.");
+  window.location.reload();
+}, 3000);
+       
+       });
+  
+}
+
+function AssignAllEvents(){
+    var btns = document.getElementsByClassName("detbtns");
+    var titles = document.getElementsByClassName("titleProd");
+   
+ 
+for (let i = 0; i < btns.length; i++){
+    btns[i].addEventListener('click', accept);
+   
+}
+}
+
+function AssignEvents(){
+    var btnz = document.getElementsByClassName("delbtnz");
+    var titles = document.getElementsByClassName("titleProd");
+   
+ 
+for (let i = 0; i < btnz.length; i++){
+    btnz[i].addEventListener('click', reject);
+}
+}
+</script>
+
+</body>
+</html>

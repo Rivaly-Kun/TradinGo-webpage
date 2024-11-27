@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>View Profile - TradinGo</title>
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<style>
+		body{
+		  font-family: 'Poppins', sans-serif !important;
+	  }
+		.navbar{
+		  display: flex;
+		  align-items: center;
+		  padding: 20px;
+	  }
+	  nav{
+		  flex: 1;
+		  text-align: right;
+	  }
+	  nav ul{
+		  display: inline-block;
+		  list-style: none;
+	  }
+	  nav ul li{
+		  display: inline-block;
+		  margin-left: 20px;
+	  }
+	  .carticonPad{
+		  margin-left: 20px;
+		  margin-top: 5px;
+		  transition: transform 0.5s;
+	  }
+	  .carticonPad:hover{
+		  transform: translateY(-5px);
+	  }
+	  #BellIcon{
+		  padding-bottom: 5px;
+		  padding-left: 20px;
+	  }
+	  .container{
+	  max-width: 1300px;
+	  margin: auto;
+	  padding-left: 25px;
+	  padding-right: 25px;
+	  }
+	  a{
+		  text-decoration: none !important;
+		  color: #555;
+	  }
+	  p{
+		  color: #555;
+	  } 
+	  </style>
+</head>
+<body>
+	<section >
+		<div class="container">
+			<div class="navbar">
+				<div>
+					<!---logo put maya here --->
+					<img src="images/LogoForNavBar.png"  width="125px" >
+				</div>
+				<nav>
+					<ul id="MenuItems">
+					  <li><a href="TradinGo.html">Home</a></li>
+					  <li><a href="products.html">Products</a></li>
+					 <li><a href="Profile.html">Profile</a></li>
+					 <li><a href="MessageList.html">Messages</a></li>         
+					
+					  <li><a href="about.html">About</a></li>
+					</ul>
+				</nav>
+				<div class="carticonPad">
+				<img id="TradeIcon" src="images/cartIcon.png" width="40px" height="40px">
+			</div>
+			<i id="BellIcon" class="fa fa-bell" style="font-size:24px"></i>
+			
+			 </div>
+			<div class="bg-white shadow rounded-lg d-block d-sm-flex">
+				<div class="profile-tab-nav border-right">
+					<div class="p-4">
+						<div class="img-circle text-center mb-3">
+							<img src="" alt="" id="PfpImg" class="shadow">
+						</div>
+						<h4 class="text-center" id="UserName"> </h4>
+					</div>
+					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+						<a class="nav-link active" id="account-tab" data-toggle="pill" href="#account" role="tab" aria-controls="account" aria-selected="true">
+							<i class="fa fa-home text-center mr-1"></i> 
+							Account
+						</a>
+						<a class="nav-link" id="password-tab" data-toggle="pill" href="#password" role="tab" aria-controls="password" aria-selected="false">
+							<i class="fa fa-handshake-o"></i> 
+							Trades
+						</a>
+					
+						
+					</div>
+				</div>
+				<div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
+					<div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
+						<button id="ChatUserBtn" class="Btn ChatUserBtn">Chat User</button>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+								  	<label>First Name</label>
+								  	<p type="text" class="form-control" id="FnameInp">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+								  	<label>Last Name</label>
+								  	<p type="text" class="form-control" id="LnameInp">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+								  	<label>Email</label>
+								  	<p type="text" class="form-control" id="EmailInp">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+								  	<p>Phone number</label>
+								  	<p type="text" class="form-control" id="contctNum">
+								</div>
+							</div>
+							
+							<div class="col-md-12">
+								<div class="form-group">
+								  	<label>Bio</label>
+									<p class="form-control" rows="4" id="bio"></p>
+								</div>
+							</div>
+						</div>
+						<div>
+						
+						</div>
+					</div>
+
+
+					<div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
+						<h3 class="mb-4">Successful Trades</h3>
+						<div class="row">
+							
+							<table class="table" border="2" style="border-collapse:collapse;">
+								<thead>
+								  <tr>
+								   
+									<th scope="col">Transaction No.</th>
+									<th scope="col">Your Item</th>
+									<th scope="col">Traded Items</th>
+									<th scope="col">Trader</th>
+						
+								  </tr>
+								</thead>
+							  
+								<tbody id="productsDiv" class="container"> 
+						
+						
+								</tbody>
+						   
+							  </table>
+						
+
+						</div>
+						<div>	
+						</div>
+					</div>
+					
+	</section>
+	<script type="module">
+let userUid;
+let product = null;
+
+ChatUserBtn.addEventListener("click", function() {
+    // Use the location object to navigate to a new page
+    location.href = "Messages.html";
+});
+
+function getShortTitle(title){
+        if(title.length > 10) title.substring(0, 47);
+        else return title;
+        return title + "...";
+    }
+
+//imports
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyB9XhRzkpjkyuAZLaMSxaLQJs7DwwNESmY",
+    authDomain: "tradingo-824d6.firebaseapp.com",
+    databaseURL: "https://tradingo-824d6-default-rtdb.firebaseio.com",
+    projectId: "tradingo-824d6",
+    storageBucket: "tradingo-824d6.appspot.com",
+    messagingSenderId: "273813724823",
+    appId: "1:273813724823:web:5af639aa92782227fe53d2",
+    measurementId: "G-K74SN99P90"
+  };
+
+  const app = initializeApp(firebaseConfig);
+
+  import { getAuth, signInWithEmailAndPassword,  signOut, updateProfile, sendSignInLinkToEmail, onAuthStateChanged }
+   from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js";
+
+   import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-analytics.js";
+
+  import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL}
+  from"https://www.gstatic.com/firebasejs/9.13.0/firebase-storage.js"
+
+  import { getDatabase, get,child, set, ref, update, remove, onValue}
+   from "https://www.gstatic.com/firebasejs/9.13.0/firebase-database.js";
+
+ const realdb = getDatabase();
+  const dbref = ref(realdb);
+    const auth = getAuth(app);
+
+        
+
+
+	//detect if user is logged in
+onAuthStateChanged(auth, (user) => {
+
+    
+ if (user  == null) {
+   window.location = 'account.html';
+ } else {
+ 
+ }
+});
+		
+
+window.onload = function(){
+        product = localStorage.Product;
+        if(product){
+            product=JSON.parse(product);
+           
+            console.log(product.UploaderUid);
+        }
+    }
+
+onAuthStateChanged(auth, (user) => {
+	var  userId = product.UploaderUid;
+    //console.log(userId);
+
+//let DisplayName;
+/*
+
+*/
+//get sa mga names details and shitz ni  user
+get(child(dbref, 'users/' + userId + '/First_Name' ))
+      .then((snapshot) =>{
+        let FName = snapshot.val();
+
+		get(child(dbref, 'users/' + userId + '/Last_Name' ))
+      .then((snapshot) =>{
+        let LName = snapshot.val();
+		
+		get(child(dbref, 'users/' + userId + '/email' ))
+      .then((snapshot) =>{
+        let email= snapshot.val();
+
+		get(child(dbref, 'users/' + userId + '/contnum' ))
+      .then((snapshot) =>{
+        let contctNum = snapshot.val();
+
+		get(child(dbref, 'users/' + userId + '/bio' ))
+      .then((snapshot) =>{
+        let bio = snapshot.val();
+
+		let trep = FName + " " + LName;
+		console.log(trep);
+
+		var inputElement = document.getElementById("UserName");
+inputElement.innerText  = trep;
+
+document.getElementById("FnameInp").textContent  =FName ;
+document.getElementById("LnameInp").textContent  =LName ;
+document.getElementById("EmailInp").textContent  =email ;
+document.getElementById("contctNum").textContent  =contctNum ;
+document.getElementById("bio").textContent  =bio ;
+
+//sa pfp
+onAuthStateChanged(auth, (user) => {
+  userUid = user.uid;
+
+  // set the image src attribute to the URL value
+  get(child(dbref, 'users/' + product.UploaderUid + '/Pfp' ))
+      .then((snapshot) =>{
+
+        let urlVal = snapshot.val();
+        console.log(urlVal);
+          document.getElementById('PfpImg').src = urlVal;
+      });
+
+});});
+});
+});
+});
+});
+});
+
+
+var OuterDiv = document.getElementById('productsDiv');
+var ArrayOfProducts = [];
+window.addEventListener('load', GetAllProducts);
+
+function GetAllProducts() {
+    onAuthStateChanged(auth, (user) => {
+        userUid = product.UploaderUid;
+ //console.log(userUid);
+
+    get(child(dbref, 'users/' + userUid + '/Trades' + '/Finished_trades' ))
+    .then((snapshot) =>{
+       // console.log(snapshot.val());
+        snapshot.forEach(prod =>{
+ArrayOfProducts.push(prod.val());
+        });
+      
+
+        AddAllProducts();
+    })
+})
+}
+
+
+function AddAllProducts(){
+    let i = 0;
+
+    ArrayOfProducts.forEach(prod =>{
+AddAProduct(prod, i++);
+    });
+   
+}
+
+
+function AddAProduct(Transaction, index){
+
+    let html = 
+    `
+    <td>`+getShortTitle(Transaction.TransActNo)+`</td>
+      <td>${Transaction.ProductTraded}</td>
+    <td class="titleProd" id="title-`+ index+`"> `+ getShortTitle(Transaction.ProductTitle) +` </td>
+      <td>${Transaction.Trader}</td>
+
+      
+    `
+// 
+    let newProd = document.createElement("tr");
+    newProd.classList.add('productcard');
+    newProd.innerHTML = html;
+    OuterDiv.append(newProd);
+
+}
+		</script>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+
+<style>
+	h2{
+	  text-align: center;
+	  padding-top: 50px;
+	  padding-bottom: 50px;
+  }
+table {
+  text-align: center;
+  border-collapse: collapse;
+width: 90%; /* Adjust this value to your liking */
+margin: 0 auto; /* Centers the table horizontally */
+border-radius: 10px; /* Rounds the table border */
+overflow: hidden; /* Ensures that the rounded corners are visible */
+table-layout: fixed; /* Makes each <tr> element the same width */
+}
+
+th, td {
+	overflow: hidden;
+  text-align: left;
+padding: 12px;
+border: 1px solid #ddd;
+width: auto; /* Reset the width to auto, since we're using fixed layout */
+}
+
+th {
+background-color: #4CAF50;
+color: white;
+}
+
+tr:nth-child(even) {
+background-color: #f2f2f2;
+}
+
+tr:hover {
+background-color: #ddd;
+}
+
+
+</style>
+</html>

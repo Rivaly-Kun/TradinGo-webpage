@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initital- scale=1">
+   
     <title>
      All Products - TradinGo
     </title>
@@ -12,42 +12,502 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
-</head>
+        <style>
+         .image-container {
+  position: relative;
+  height: 600px; /* Adjust the height to your desired value */
+  overflow: hidden;
+}
+
+.image-container img {
+  position: absolute;
+  animation: moveUpDown 2s infinite alternate;
+}
+
+@keyframes moveUpDown {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50px); /* Adjust the distance to your desired value */
+  }
+}
+
+    .ProdBar {
+    width: 500px;
+    height: 65px;
+    background-color: rgb(255, 255, 255);
+    margin: 3px !important;
+    border-radius: 10px;
+    border: #000 solid 1px;
+}
+   .title::after {
+    content: '';
+    background: #ff523b;
+    width: 0px !important;
+    height: 0px !important;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+           #productsDiv{
+                display: flex;
+    flex-wrap: wrap;
+    padding-left: 160px;
+    padding-bottom: 100px;
+            }
+            
+                .productcard{
+                    border: 1px black solid;
+                    height: 430px;
+            width: 300px;
+                    margin: 20px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    flex-direction: column;
+                    border-radius: 10px;
+                    transition: border-color .3s;
+                    padding: 10px;
+                }
+                .productcard:hover{
+                    border-color: rgb(233, 68, 68);
+                }
+                .thumb{
+                    width: 260px;
+                    height: 160px;
+                    cursor: pointer;
+                }
+                .detbtns{
+                    background-color: #fc6f25;
+                    color: black;
+                    margin-bottom: 15px;
+                }
+                .detbtns:hover{
+                    background-color: wheat;
+                }
+                .title{
+                    font-size: 16;
+                    font-weight: bold;
+                    cursor: pointer;
+                    padding-left: 5px;
+                    width: 100%;
+                    padding-right: 5px;
+                    text-align: center; 
+            }
+            .points{
+                align-self: flex-start;
+                word-wrap: break-word;
+                height: 192px;
+            }
+            .inputBox{
+                padding: 5px;
+                border-radius: 5px;
+                border-width: 1px;
+                border: 1px solid #ff523b;
+                transition: width 0.3s ease-in-out;
+                width: 200px;
+            }
+            .square{
+                transition: width 0.3s ease-in-out;
+                width: 508px; 
+    }
+            .inputBox:focus-within {
+                width: 515px;
+}
+        
+            .input-container {
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  width: max-content;
+}
+
+.input-container input {
+  padding-right: 30px; /* adjust this value as needed to make room for the icon */
+      padding: 7px;
+}
+
+.input-container i {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+.carticonPad {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 15px;
+  margin-right: 1px;
+}
+
+.carticonPad #circle {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: red;
+  margin-left: 5px;
+  display: none;
+}
+#circle2 {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: red;
+  margin-left: 5px;
+  display: none;
+}s
+            </style>
+    </head>
 <body>
 <!--- header ni boy --->
 <div class="container">
 <div class="navbar">
-    <div>
+    <div class="ImgNav">
         <!---logo put maya here --->
         <img src="images/LogoForNavBar.png"  width="125px" >
+
+        <div class="input-container">
+            <input type="text" id="myInput" class="inputBox">
+            <i class="fa fa-search"></i>
+          </div>
     </div>
     <nav>
         <ul id="MenuItems">
             <li><a href="TradinGo.html">Home</a></li>
             <li><a href="products.html">Products</a></li>
-            <li><a href="account.html">Messages</a></li>
-            <li><a href="accProfile.html">Account</a></li>
+           <li><a href="Profile.html">Profile</a></li>
+           <li><a href="MessageList.html">Messages</a></li>         
+          
             <li><a href="about.html">About</a></li>
+
+           
         </ul>
     </nav>
     <div class="carticonPad">
-    <img src="images/cartIcon.png" width="40px" height="40px">
+    <img src="images/cartIcon.png" id="TradeIcon" width="40px" height="40px">    
+    <div id="circle"></div>
+
 </div>
+<i id="BellIcon" class="fa fa-bell" style="font-size:24px"></i>
+<div id="circle2"></div>
 <img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
  </div>
 </div>
-
+    
 <div class="row row-2">
-    <h2>All products</h2>
-    <select>
-        <option>Default Sorting</option>
-        <option>Sort by availability</option>
-        <option>Sort by popularity</option>
-        <option>Sort by date</option>
-        <option>Sort by letter (A-Z)</option>
+    
+   
+      
+    <select id="select">
+        <option value="Default">Default</option>
+        <option value="Electronic Devices">Electronic Devices</option>
+        <option value="Electronic Accessories">Electronic Accessories</option>
+        <option value="Tv & Home Appliances">Tv & Home Appliances</option>
+        <option value="Beauty Products">Beauty Products</option>
+        <option value="Babies & toys">Babies & toys</option>
+       <option value="Groceries">Groceries</option>
+       <option value="Women's Clothing">Women's Clothing</option>
+       <option value="Men's Clothing">Men's Clothing</option>
+       <option value="Kids's Clothing">Kids's Clothing</option>
+        <option value="Home&Living">Home & Living</option>
+        
     </select>
+
+</div>
+  
+<div id="productsDiv" class="container">
+     
 </div>
 
+
+<script type="module">
+
+
+let userId;
+
+function getShortTitle(title) {
+  if (title.length > 19)
+    return title.substring(0, 19) + "...";
+  else
+    return title;
+}
+
+
+//imports
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyB9XhRzkpjkyuAZLaMSxaLQJs7DwwNESmY",
+    authDomain: "tradingo-824d6.firebaseapp.com",
+    databaseURL: "https://tradingo-824d6-default-rtdb.firebaseio.com",
+    projectId: "tradingo-824d6",
+    storageBucket: "tradingo-824d6.appspot.com",
+    messagingSenderId: "273813724823",
+    appId: "1:273813724823:web:5af639aa92782227fe53d2",
+    measurementId: "G-K74SN99P90"
+  };
+
+  const app = initializeApp(firebaseConfig);
+
+  import { getDatabase, set, ref, child, get, update}
+   from "https://www.gstatic.com/firebasejs/9.13.0/firebase-database.js";
+
+   import { getAuth, signInWithEmailAndPassword,  signOut, updateProfile, sendSignInLinkToEmail, onAuthStateChanged }
+   from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js";
+
+   const realdb = getDatabase();
+   const auth = getAuth(app);
+var OuterDiv = document.getElementById('productsDiv');
+var ArrayOfProducts = [];
+
+//detect user has notif
+onAuthStateChanged(auth, (user) => {
+    const dbref = ref(realdb);
+
+ userId = user.uid;
+ console.log(userId);
+
+  
+
+       
+    get(child(dbref, 'users/' + userId + '/Notification' ))
+    .then((snapshot) =>{
+       // console.log(snapshot.val());
+        if(snapshot.val() === null){
+            //console.log('Potangina');
+        }else{  
+           // console.log('yawa');
+           var circle2 = document.getElementById("circle2");
+circle2.style.display = "block"; /* show the circle */
+
+        }
+    })
+
+    get(child(dbref, 'users/' + userId + '/Trades' + '/Pending_Trade' ))
+    .then((snapshot) =>{
+        console.log(snapshot.val());
+        if(snapshot.val() === null){
+            console.log('shesh par');
+        }else{
+            console.log('erp erp par');
+            var circle = document.getElementById("circle");
+circle.style.display = "block"; /* show the circle */
+
+        }
+    })
+
+})
+
+window.addEventListener('load', GetAllProducts);
+
+function GetAllProducts() {
+
+    const dbref = ref(realdb);
+
+    get(child(dbref,"Products/"))
+    .then((snapshot) =>{
+        snapshot.forEach(prod =>{
+ArrayOfProducts.push(prod.val());
+//console.log(snapshot);
+        });
+
+        AddAllProducts();
+    })
+}
+
+
+
+
+document.getElementById('TradeIcon').addEventListener('click', function() {
+ 
+  onAuthStateChanged(auth, (user) => {
+  if (user  == null) {
+    window.location = 'account.html';
+  } else {
+   window.location = 'Transactions.html';
+  }
+});
+});
+
+
+document.getElementById('BellIcon').addEventListener('click', function() {
+  onAuthStateChanged(auth, (user) => {
+  if (user  == null) {
+    window.location = 'account.html';
+  } else {
+   window.location = 'Notifications.html';
+  }
+});
+});
+
+
+
+function AddAllProducts(){
+    let i = 0;
+
+    ArrayOfProducts.forEach(prod =>{
+AddAProduct(prod, i++);
+    });
+    AssignAllEvents();
+}
+
+function AddAProduct(product, index){
+   
+    
+
+   
+              let html = 
+    `
+    <img src="`+ product.LinksOfImgsArray[0] +`" class="thumb mt-2" id="thumb-`+ index +`">
+        <p class="title" id="title-`+ index+`"> `+ getShortTitle(product.ProductTitle) +` </p>
+       `+ 
+       
+       
+       GenerateStockLabel(product.Stock)
+
+       +
+       `
+        <h5 class="price">Market Value ₱`+ product.Price +` </h5>
+        <button class="detbtns btn" id="detbtn-`+ index +`">View details</button>
+    `
+
+    let newProd = document.createElement("div");
+    newProd.classList.add('productcard');
+    newProd.innerHTML = html;
+    OuterDiv.append(newProd);   
+
+    newProd.querySelector('.detbtns').addEventListener('click', GoToProductDetails);
+            
+
+
+   
+    
+    //select yawa naguba
+const selectElement = document.getElementById("select"); 
+let productcard = document.getElementsByClassName("productcard");
+
+
+selectElement.addEventListener('change', (event) => {
+  const selectedIndex = selectElement.selectedIndex;
+  const selectedOption = selectElement.options[selectedIndex];
+  const selectedValue = selectedOption.value;
+
+
+//Test Test mo gana na pero usabon palang medj
+
+  console.log(`Selected option: ${selectedValue}`);
+  
+
+//shesh pareh
+    if(product.Category === selectedValue){
+    productcard[index].style.display= "";
+  }
+   else if(selectedValue === "Default"){
+    productcard[index].style.display= "";
+}
+else{
+    productcard[index].style.display= "none";
+  }
+  });
+
+
+//fuck yes
+//serge bar
+let pota = document.getElementById("myInput");
+
+pota.addEventListener("input", function() {
+    let myArray = [];
+//get sa value ni input
+
+var inputText = document.getElementById("myInput").value;
+			
+
+var lowerCaseText = inputText.toLowerCase();
+
+   //var input = document.getElementById("myInput");
+   //var umay = input.toLowerCase();
+ 
+   var value = lowerCaseText;
+
+const words = product.ProductTitle.split(" ");
+const aWords = words.filter(word => word.charAt(0).toLowerCase() === value);
+const result = aWords.join(" ");
+myArray.push(product.ProductTitle);
+//console.log(myArray.includes(value));
+const filteredWords = myArray.filter(word => {
+  return word.includes(value);
+});
+//console.log(filteredWords);
+
+    if(product.ProductTitle == result || product.ProductTitle == value || product.ProductTitle == filteredWords)
+  {
+    productcard[index].style.display= "";
+  }
+else{
+    productcard[index].style.display= "none";
+  }
+});
+
+
+}
+
+function GenerateStockLabel(stock){
+let stocklabel = document.createElement('h5');
+stocklabel.classList.add('stock');
+
+if (stock > 0){
+    stocklabel.innerHTML='In stock';
+    stocklabel.classList.add('text-success');
+}
+else{
+    stocklabel.innerHTML='Out of stock';
+    stocklabel.classList.add('text-warning');
+}
+return stocklabel.outerHTML;
+}
+
+function GetUl(array){
+    let ul = document.createElement("ul");
+    ul.classList.add('points');
+
+    array.forEach(element => {
+let li = document.createElement("li");
+li.innerText=element;
+ul.append(li);
+    });
+    return ul.outerHTML;
+}
+
+function GetProductIndex(id){
+    var indstart = id.indexOf('-') + 1;
+    var indend = id.length;
+    return Number(id.substring(indstart, indend));
+}
+
+function GoToProductDetails(event){
+var index = GetProductIndex(event.target.id);
+localStorage.Product = JSON.stringify(ArrayOfProducts[index]);
+window.location = "products-details.html";
+}
+
+function AssignAllEvents(){
+    var btns = document.getElementsByClassName("detbtns");
+    var titles = document.getElementsByClassName("title");
+    var thumbs = document.getElementsByClassName("thumb");
+ 
+for (let i = 0; i < btns.length; i++){
+    btns[i].addEventListener('click', GoToProductDetails);
+    titles[i].addEventListener('click', GoToProductDetails);
+    thumbs[i].addEventListener('click', GoToProductDetails);
+}
+}
+</script>
+
+
+<!-- Item
 <div class="small-container">
     <a href="products-details.html">
 <div class="row">
@@ -58,107 +518,18 @@
             <a href=""> &#128994; Products available </a>
         </div>
     </a>
-    </div>
-
-    <!--Lahi na nani na product-->
-    <div class="col-4">
-        <img src="images/product-2.jpg">
-        <h4>Hrx shoes</h4>
-        <div class="rating">
-            <a href=""> &#128994; Products available </a>
-        </div>
-    </div>
-    <!--Lahi na nani na product-->
-    <div class="col-4">
-        <img src="images/product-3.jpg"  >
-        <h4>Jogging Pants</h4>
-        <div class="rating">
-            <a href=""> &#128994; Products available </a>
-        </div>
-    </div>
-    <!--Lahi na nani na product-->
-    <div class="col-4">
-        <img src="images/product-4.jpg">
-        <h4>Plain blue Puma polo</h4>
-        <div class="rating">
-            <a href=""> &#128308; Products not available </a>
-        </div>
-    </div>
-    <!--Lahi na nani na product-->
-    <div class="col-4">
-        <img src="images/product-1.jpg">
-        <h4>Red puma shirt</h4>
-        <div class="rating">
-            <a href=""> &#128308; Products not available </a>
-        </div>
-    </div>
-    <!--Lahi na nani na product-->
-    <div class="col-4">
-        <img src="images/product-2.jpg">
-        <h4>Hrx shoes</h4>
-        <div class="rating">
-            <a href=""> &#128994; Products available </a>
-        </div>
-    </div>
-    <!--Lahi na nani na product-->
-    <div class="col-4">
-        <img src="images/product-3.jpg"  >
-        <h4>Jogging Pants</h4>
-        <div class="rating">
-            <a href=""> &#128994; Products available </a>
-        </div>
-    </div>
-    <!--Lahi na nani na product-->
-    <div class="col-4">
-        <img src="images/product-4.jpg">
-        <h4>Plain blue Puma polo</h4>
-        <div class="rating">
-            <a href=""> &#128994; Products available </a>
-        </div>
-    </div>
-    <!--Lahi na nani na product-->
-    <div class="col-4">
-        <img src="images/product-5.jpg " >
-        <h4>Highcut shoes</h4>
-        <div class="rating">
-            <a href=""> &#128994; Products available </a>
-        </div>
-     
-    </div>
-    <!--Lahi na nani na product-->
-    <div class="col-4">
-        <img src="images/product-6.jpg">
-        <h4>Black Puma shirt</h4>
-        <div class="rating">
-            <a href=""> &#128994; Products available </a>
-        </div>
-     
-    </div>
-    <!--Lahi na nani na product-->
-    <div class="col-4">
-        <img src="images/product-7.jpg">
-        <h4>Hrx Socks</h4>
-        <div class="rating">
-            <a href=""> &#128994; Products available </a>
-        </div>
-     
-    </div>
-    <!--Lahi na nani na product-->
-    <div class="col-4">
-        <img src="images/product-8.jpg">
-        <h4>Fossil Brand Watch</h4>
-        <div class="rating">
-            <a href=""> &#128308; Products not available </a>
-        </div>
-        
-    </div>
+    
 </div>
+-->
+
+<!-- buttons
 <div class="page-btn">
 <span>1</span>
 <span>2</span>
 <span>3</span>
 <span>4</span>
 <span>&#8594;</span>
+-->
 
 </div>
 </div>

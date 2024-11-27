@@ -5,13 +5,10 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
-body {
-  background: radial-gradient(#fff,#ffd6d6);
-}
+
 .container {
   height: 650px;
   width: 1300px;
-  background: radial-gradient(#fff,#ffd6d6);
   margin-top: 30px;
   margin-bottom: 40px;
   display: inline-block;

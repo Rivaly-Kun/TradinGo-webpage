@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initital- scale=1">
+   
     <title>
      All Products - TradinGo
     </title>
@@ -16,30 +16,116 @@
 <body>
 <!--- header ni boy --->
 <div class="container">
-<div class="navbar">
-    <div>
-        <!---logo put maya here --->
-        <img src="images/LogoForNavBar.png"  width="125px" >
-    </div>
-    <nav>
-        <ul id="MenuItems">
-            <li><a href="TradinGo.html">Home</a></li>
+    <div class="navbar">
+        <div>
+            <!---logo put maya here --->
+            <img src="images/LogoForNavBar.png"  width="125px" >
+        </div>
+        <nav>
+            <ul id="MenuItems">
+                   <li><a href="TradinGo.html">Home</a></li>
             <li><a href="products.html">Products</a></li>
-            <li><a href="account.html">Messages</a></li>
-            <li><a href="accProfile.html">Account</a></li>
+           <li><a href="Profile.html">Profile</a></li>
+           <li><a href="MessageList.html">Messages</a></li>         
+          
             <li><a href="about.html">About</a></li>
-        </ul>
-    </nav>
-    <div class="carticonPad">
-    <img src="images/cartIcon.png" width="40px" height="40px">
+            </ul>
+        </nav>
+        <div class="carticonPad">
+        <img id="TradeIcon" src="images/cartIcon.png" width="40px" height="40px">
+       
+    </div>
+    <i id="BellIcon" class="fa fa-bell" style="font-size:24px"></i>
+    <img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
+     </div>
 </div>
-<img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
- </div>
-</div>
+
+<style>
+    
+    h2{
+        text-align: center;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+    .Members img{
+width: 100px;
+height: 100px;
+    }
+    .Members div{
+        border: 2px solid black;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    align-content: stretch;
+    flex-wrap: nowrap;
+    flex-direction: column;
+
+    }
+    .Members{
+        display: flex;
+    flex-wrap: wrap;
+  justify-content: center;
+  align-items: center; /* center the div horizontally */
+    }
+
+    .Members > div {
+  margin-right: 30px;
+  margin-top: 30px; /* add 10px space between each div */
+}
+</style>
 <!--about us himo na-->
+
 <div class="pete-butAngry">
-<img src="images/user-2.jpg" height="500px" width="500px">
+    <h2 style="text-align: center;">Core Values</h2>
+    Customer Satisfaction: Putting the needs and wants of customers first and always striving to exceed their expectations.
+    Innovation: Continuously seeking new and better ways to improve products and services.
+    Integrity: Conducting business with honesty, transparency, and a strong ethical code.
+    Collaboration: Encouraging teamwork, open communication, and a supportive work environment.
+    Responsiveness: Acting quickly and effectively to changing market conditions and customer needs.
+
+
+
+    <h2 style="text-align: center; padding-top: 25px;">Terms And Conditions</h2>
+    Introduction: These terms and conditions govern the use of TradinGo's products and services. By using TradinGo's products and services, you agree to be bound by these terms and conditions.
+
+    Use of Products and Services: TradinGo grants you a limited, non-exclusive, non-transferable license to use its products and services for personal or commercial use, subject to these terms and conditions.
+    
+    Intellectual Property: TradinGo's products and services, including any software, logos, trademarks, and other proprietary materials, are protected by intellectual property laws and belong to TradinGo. You may not use TradinGo's intellectual property for any purpose other than as permitted by these terms and conditions.
+    
+    Disclaimer of Warranties: TradinGo provides its products and services on an "as is" and "as available" basis, without any warranties of any kind, express or implied. TradinGo does not guarantee the accuracy, completeness, or reliability of its products and services.
+    
+    Limitation of Liability: TradinGo will not be liable for any damages arising from the use of its products and services, including but not limited to direct, indirect, incidental, special, or consequential damages.
+    
+    Modification of Terms and Conditions: TradinGo reserves the right to modify these terms and conditions at any time, and your continued use of TradinGo's products and services will constitute acceptance of any modifications.
+    
+    Governing Law: These terms and conditions will be governed by and construed in accordance with the laws of the jurisdiction in which TradinGo is located.
+
+<h4 style="color: red; padding-top: 25px;">Note: By using our web app you are automatically accepting our terms and conditions</h4>
+<h2>Our Team</h2>
+<div class="Members">
+
+<div class="gab">
+    <img src="images/gab.png">
+   
+    <p> Gabriel Cahiyang</p>
 </div>
+<div class="pete">
+<img src="images/pete.jpg" alt="">
+<p>Pete Johanseen</p>
+</div>
+<div class="jan">
+    <img src="images/jan.jpg" alt="">
+    <p>Jan Leander Matutes</p>
+    </div>
+<div class="ayle">
+    <img src="images/ayle.jpg" alt="">
+    <p>Ayle Sode</p>
+    </div>
+</div>
+</div>
+
 <!--footer-->
 <div class="footer">
     <div class="container">
@@ -79,8 +165,71 @@
     </div>
 </div>
 
-<!--Toggle for js menu shits-->
 <script>
+    var MenuItems = document.getElementById("MenuItems");
+
+    MenuItems.style.maxHeight = "0px";
+
+    function menutoggle(){
+        if(MenuItems.style.maxHeight == "0px"){
+            MenuItems.style.maxHeight = "600px";
+        }
+        else{
+            MenuItems.style.maxHeight = "0px";
+        }
+    }
+</script>
+
+
+<!--Toggle for js menu shits-->
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyB9XhRzkpjkyuAZLaMSxaLQJs7DwwNESmY",
+    authDomain: "tradingo-824d6.firebaseapp.com",
+    databaseURL: "https://tradingo-824d6-default-rtdb.firebaseio.com",
+    projectId: "tradingo-824d6",
+    storageBucket: "tradingo-824d6.appspot.com",
+    messagingSenderId: "273813724823",
+    appId: "1:273813724823:web:5af639aa92782227fe53d2",
+    measurementId: "G-K74SN99P90"
+  };
+
+  const app = initializeApp(firebaseConfig);
+
+  import { getDatabase, set, ref, child, get}
+   from "https://www.gstatic.com/firebasejs/9.13.0/firebase-database.js";
+
+   import { getAuth, signInWithEmailAndPassword,  signOut, updateProfile, sendSignInLinkToEmail, onAuthStateChanged }
+   from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js";
+
+   const realdb = getDatabase();
+   const auth = getAuth(app);
+
+document.getElementById('TradeIcon').addEventListener('click', function() {
+ 
+ onAuthStateChanged(auth, (user) => {
+ if (user  == null) {
+   window.location = 'account.html';
+ } else {
+  window.location = 'Transactions.html';
+ }
+});
+});
+
+
+document.getElementById('BellIcon').addEventListener('click', function() {
+ onAuthStateChanged(auth, (user) => {
+ if (user  == null) {
+   window.location = 'account.html';
+ } else {
+  window.location = 'Notifications.html';
+ }
+});
+});
+
     var MenuItems = document.getElementById("MenuItems");
 
     MenuItems.style.maxHeight = "0px";

@@ -2,17 +2,266 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initital- scale=1">
-    <title>
-     All Products - TradinGo
+   
+    <title id="titleli">
     </title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="specialstyle.css">
     
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
-</head>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+   <script src="
+   https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js
+   "></script>
+   <link href="
+   https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css
+   " rel="stylesheet">
+   
+     <style>
+#promptOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+#promptContent {
+  background-color: #fff;
+  width: 300px;
+  height: 300px;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+button {
+  margin-top: 10px;
+}
+ 
+#promptContent h2{
+    padding-bottom: 7px;
+    text-align: center;
+}
+
+textarea {
+    border-radius: 5px;
+  width: 260px;
+  height: 75%;
+  resize: none;
+  box-sizing: border-box;
+}
+
+#Original_Poster {
+  display: inline-block;
+  position: relative;
+  color: #4CAF50;
+}
+
+#Original_Poster::after {
+    content: "";
+  position: absolute;
+  bottom: -2px; /* Adjust the distance to your desired value */
+  left: 0;
+  width: 100%;
+  border-bottom: 2px dashed #000; /* Adjust the thickness and color of the dashed line */
+}
+
+#productsDiv{
+                display: flex;
+                flex-wrap: wrap;
+               
+            }
+            
+                .productcard{
+                    border: 1px black solid;
+                    height: 430px;
+            width: 300px;
+                    margin: 20px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    flex-direction: column;
+                    border-radius: 10px;
+                    transition: border-color .3s;
+                    padding: 10px;
+                }
+                .productcard:hover{
+                    border-color: rgb(233, 68, 68);
+                }
+                .thumb{
+                    width: 260px;
+                    height: 160px;
+                    cursor: pointer;
+                }
+                .detbtns{
+                    background-color: rgb(233, 68, 68);
+                    color: black;
+                    margin-bottom: 15px;
+                }
+                .detbtns:hover{
+                    background-color: wheat;
+                }
+                .title{
+                    font-size: 16;
+                    font-weight: bold;
+                    cursor: pointer;
+                    padding-left: 5px;
+                    width: 100%;
+                    padding-right: 5px;
+                    text-align: center; 
+            }
+            .points{
+                align-self: flex-start;
+                word-wrap: break-word;
+                height: 192px;
+            }
+
+#points li{
+    list-style-type: circle;
+    padding-left:1em;
+    color:#000000;; /* red bullet */
+}
+
+        #contentsDiv{
+            display: flex;
+            justify-content: center;
+          padding-top: 70px;
+          padding-left: 70px;
+        }
+    
+        #smlimgDiv{
+            display: flex;
+            width: 550px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+            margin-left: 6px;
+        }
+    
+        #imgsDiv,
+         #detailsDiv{
+    height: 500px;
+        
+        }
+        #bigimg{
+            width: 550px;
+            min-height: 300px;
+            max-height: 400px;
+        }
+        .smimgs{
+    height: 80px;
+    width: 100px;
+    border: 1px red solid;
+        }
+    .breadcrumb{
+        background-color: transparent;
+        border: 1px lightgray solid;
+        font-size: 12px;
+        color: darkgrey;
+        margin-top: 10px;
+    }
+    .breadcrumb-item, .breadcrumb-item a{
+    color: darkblue !important;
+    font-weight: bold;
+    }
+    .active{
+        color: black;
+        font-weight: normal;
+    }
+    #detailsDiv{
+        width: 300px;
+        height: 300px;
+       padding-left: 30px;
+       padding-bottom: 50px;
+    }
+    #title{
+    
+        font-style: bold;
+        word-wrap: break-word;
+        font-size: 30px;
+        padding-bottom: 20px;
+    }
+    #description{
+text-align: center;
+        border-radius: 10px;
+        border:1px dashed black;
+        padding-top: 25px;
+        padding-bottom: 25px;
+    }
+    #tradeable{
+        padding-top: 20px;
+        padding-bottom: 15px;  
+    }
+    ul{
+        padding-bottom: 10px;
+    }
+    #btndiv{
+        padding-top: 15px;
+    }
+    .button-container {
+  display: inline-block;
+  text-align: center;
+  margin-right: 10px;
+}
+
+.button-text {
+  display: block;
+  margin-top: 5px;
+}
+
+    
+    .OpBtns{
+    border-radius: 50%;
+    padding:10px;
+}
+
+.repbuttons {
+  display: inline-block;
+  padding: 6px 13px;
+  font-size: 10px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  background-color: #4CAF50; /* Green background color */
+  color: white; /* Text color */
+  border: none; /* Remove border */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Add a pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Add a smooth transition effect */
+}
+
+.repbuttons:hover {
+  background-color: #2c742f; /* Darker green background color on hover */
+}
+.repbutton {
+  display: inline-block;
+  padding: 6px 13px;
+  font-size: 10px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  background-color: red; /* Green background color */
+  color: white; /* Text color */
+  border: none; /* Remove border */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Add a pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Add a smooth transition effect */
+}
+
+.repbutton:hover {
+  background-color: rgb(141, 0, 0); /* Darker green background color on hover */
+}
+    </style>
+
+    </head>
 <body>
 <!--- header ni boy --->
 <div class="container">
@@ -25,119 +274,372 @@
         <ul id="MenuItems">
             <li><a href="TradinGo.html">Home</a></li>
             <li><a href="products.html">Products</a></li>
-            <li><a href="account.html">Messages</a></li>
-            <li><a href="accProfile.html">Account</a></li>
+           <li><a href="Profile.html">Profile</a></li>
+           <li><a href="MessageList.html">Messages</a></li>         
+          
             <li><a href="about.html">About</a></li>
         </ul>
     </nav>
     <div class="carticonPad">
-    <img src="images/cartIcon.png" width="40px" height="40px">
+    <img id="TradeIcon" src="images/cartIcon.png" width="40px" height="40px">
 </div>
+<i id="BellIcon" class="fa fa-bell" style="font-size:24px"></i>
 <img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
  </div>
 </div>
-<!---single prods-->
-<div class="small-container single-product">
-    <div class="row">
-        <div class="col-2">
-            <img src="images/gallery-1.jpg" width="100%" id="ProductImg">
 
-<div class="small-img-row">
-    <div class="small-img-col" >
-        <img src="images/gallery-1.jpg" width="100%" class="small-img">
-    </div>
-    <div class="small-img-col">
-        <img src="images/gallery-2.jpg" width="100%" class="small-img">
-    </div>
-    <div class="small-img-col">
-        <img src="images/gallery-3.jpg" width="100%" class="small-img">
-    </div>
-    <div class="small-img-col">
-        <img src="images/gallery-4.jpg" width="100%" class="small-img">
-    </div>
-</div>
-</div>  
-
-        <div class="col-2">
-<p>Home / T-shirt</p>
-<h1>Red printed T-shirt by HRX</h1>
-<h4><a href=""> &#128994; Products available </a></h4>
-<a href="account.html" class="btn">Chat Trader</a>
-<h3>Product Details<i class="fa fa-indent"></i></h3>
-<br>
-<p>HRX By Hrithik Roshan Lifestyle Men Jet Red Bio-Wash Brand Carrier Tshirts</p>
+  <div class="container"> 
+    <div id="promptOverlay">
+        <div id="promptContent">
+          <h2>Report</h2>
+          <textarea id="promptTextarea" rows="4" cols="50" placeholder="Type your complaint here....."></textarea>
+          <button id="SubmitReport" class="repbuttons">Submit</button>
+          <button id="closePromptButton" class="repbutton">Close</button>
         </div>
+      </div>
+<div id="contentsDiv">
+    <div id="imgsDiv" class="mr-5">
+      <div id="bigimgDiv">
+        <img id="bigimg"src="" alt="">
+    </div>
+
+    <div id="smlimgDiv">
+        
     </div>
 </div>
+<div id="detailsDiv">
+    <h4 id="title"></h4>
+    <ul id="points">
+       
+    </ul>
+    <p id="description"></p>
+    <h3 id="tradeable"></h3>
+    <h3 id='Original_Poster'></h3>
+    <div id="btndiv" class="mt-3">
+        <div class="button-container">
+          <button class="OpBtns" id="Chat-user">
+            <img src="images/ChatIcon.png" width="30px" height="30px">
+          </button>
+          <span class="button-text">Chat</span>
+        </div>
+        <div class="button-container">
+          <button class="OpBtns" id="TradeBtn">
+            <img src="images/Offer.png" width="30px" height="30px">
+          </button>
+          <span class="button-text">Trade</span>
+        </div>
+        <div class="button-container">
+          <button class="OpBtns" id="Report">
+            <img src="images/Alert.png" width="30px" height="30px">
+          </button>
+          <span class="button-text">Report</span>
+        </div>
+      </div>
+      
+</div>
+</div>
+</div>
 
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyB9XhRzkpjkyuAZLaMSxaLQJs7DwwNESmY",
+    authDomain: "tradingo-824d6.firebaseapp.com",
+    databaseURL: "https://tradingo-824d6-default-rtdb.firebaseio.com",
+    projectId: "tradingo-824d6",
+    storageBucket: "tradingo-824d6.appspot.com",
+    messagingSenderId: "273813724823",
+    appId: "1:273813724823:web:5af639aa92782227fe53d2",
+    measurementId: "G-K74SN99P90"
+  };
+
+  const app = initializeApp(firebaseConfig);
+
+  import { getAuth, signInWithEmailAndPassword,  signOut, updateProfile, sendSignInLinkToEmail, onAuthStateChanged }
+   from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js";
+
+   import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-analytics.js";
+
+  import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL}
+  from"https://www.gstatic.com/firebasejs/9.13.0/firebase-storage.js"
+
+  import { getDatabase, get,child, set, ref, update, remove}
+   from "https://www.gstatic.com/firebasejs/9.13.0/firebase-database.js";
+
+ const realdb = getDatabase();
+  
+
+  const dbref = ref(realdb);
+    const auth = getAuth(app);
+
+  document.getElementById("TradeBtn").addEventListener("click", function(){
+    onAuthStateChanged(auth, (user) => {
+  if (user  == null) {
+  window.location.href = "account.html";
+  } else {
+   console.log("Auth state changed");
+   window.location.href = "adminForTrade.html";
+  }
+});
+});
+
+document.getElementById("Original_Poster").addEventListener("click", function(){
+    onAuthStateChanged(auth, (user) => {
+  if (user  == null) {
+  window.location.href = "account.html";
+  } else {
+   console.log("Auth state changed");
+   window.location.href = "ViewUserPfp.html";
+  }
+});
+});
+
+
+document.getElementById('BellIcon').addEventListener('click', function() {
+ onAuthStateChanged(auth, (user) => {
+ if (user  == null) {
+   window.location = 'account.html';
+ } else {
+  window.location = 'Notifications.html';
+ }
+});
+});
+
+
+//for report Btn
+document.getElementById('Report').addEventListener('click', function() {
+    onAuthStateChanged(auth, (user) => {
+ if (user  == null) {
+   window.location = 'account.html';
+ } else {
+    promptOverlay.style.display = 'flex';
+ }
+});
+});
+
+const closePromptButton = document.getElementById('closePromptButton');
+const promptOverlay = document.getElementById('promptOverlay');
+
+//submit report
+document.getElementById('SubmitReport').addEventListener('click', function() {
+    onAuthStateChanged(auth, (user) => {
+      let userId = user.uid;
+      const promptTextarea = document.getElementById('promptTextarea');
+    
+      get(child(dbref, 'users/' + userId + '/First_Name' ))
+      .then((snapshot) =>{
+        let FName = snapshot.val();
+
+		get(child(dbref, 'users/' + userId + '/Last_Name' ))
+      .then((snapshot) =>{
+        let LName = snapshot.val();
+
+        let FullName = FName + " " + LName;
+
+        let ReportUid = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        const currentDate = new Date();
+        const currentYear = currentDate.getFullYear();
+const currentMonth = currentDate.getMonth();
+const currentDay = currentDate.getDate();
+
+        update(ref(realdb,'Reports/' + ReportUid), {
+     Reporter: FullName,
+     ReporterUserUid: userId,
+     ReportedProduct:product.ProductTitle,
+     ReportedProductImg:product.LinksOfImgsArray[0],
+     ReportText: promptTextarea.value,
+     Date: currentYear + "-" + currentMonth + "-" + currentDay,
+     ItemReported: product.ProductUid,
+UploaderName: product.Uploader,
+UploaderUid: product.UploaderUid,
+
+
+    }).then(() => {
+      // Update the email
+        Swal.fire('Update success!');
+        promptOverlay.style.display = 'none';
+    });
+
+});
+});
+});
+
+});
+
+
+closePromptButton.addEventListener('click', () => {
+  promptOverlay.style.display = 'none';
+});
+   
+let UserName = [];
+    let product = null;
+
+
+    window.onload = function(){
+        product = localStorage.Product;
+        if(product){
+            product=JSON.parse(product);
+            LoadProduct();
+            
+        }
+    }
+
+    function LoadProduct(){
+
+        document.getElementById('Original_Poster').innerHTML = " Product Owner "  +product.Uploader;
+        document.getElementById('titleli').innerHTML = product.ProductTitle;
+        document.getElementById('bigimg').src = product.LinksOfImgsArray[0];
+        document.getElementById('title').innerHTML = product.ProductTitle;
+        document.getElementById('description').innerHTML = product.Description;
+        document.getElementById('tradeable').innerHTML = "Market Value ₱" + product.Price;
+        if(product.Stock < 1)document.getElementById('btnDiv').innerHTML = '<h3 class="text-warning"> Out of stock</h3>';
+    
+        GenImgs();
+    }
+
+
+
+function GenImgs(){
+    let  i = 1; 
+    let html = '';
+
+    product.LinksOfImgsArray.forEach(imglink =>{
+        let img = document.createElement('img');
+        img.src = imglink;
+        img.classList.add("smimgs","mr-2","mb-2");
+        img.id = "im" + (i++);
+        img.addEventListener('click', ChangeBigImg);
+        document.getElementById('smlimgDiv').append(img);
+    });
+}
+
+function ChangeBigImg(event){
+let elem = document.getElementById(event.target.id);
+document.getElementById('bigimg').src = elem.src;
+}
+  
+function getShortTitle(title){
+                if(title.length > 49) title.substring(0, 47);
+                else return title;
+                return title + "...";
+            }
+        
+        //imports
+        
+        var OuterDiv = document.getElementById('productsDiv');
+        var ArrayOfProducts = [];
+        window.addEventListener('load', GetAllProducts);
+        
+        function GetAllProducts() {
+        
+            const dbref = ref(realdb);
+        
+            get(child(dbref,"Products/"))
+            .then((snapshot) =>{
+                snapshot.forEach(prod =>{
+        ArrayOfProducts.push(prod.val());
+        console.log(snapshot);
+                });
+        
+                AddAllProducts();
+            
+            })
+        }
+        
+        
+        function AddAllProducts(){
+            let i = 0;
+        
+            ArrayOfProducts.forEach(prod =>{
+        AddAProduct(prod, i++);
+            });
+            AssignAllEvents();
+        }
+        
+        function AddAProduct(product, index){
+            let html = 
+            `
+            <img src="`+ product.LinksOfImgsArray[0] +`" class="thumb mt-2" id="thumb-`+ index +`">
+                <p class="title" id="title-`+ index+`"> `+ getShortTitle(product.ProductTitle) +` </p>
+               `+ 
+    
+               
+               GenerateStockLabel(product.Stock)
+        
+               +
+               `
+                <h5 class="price">Market Value ₱`+ product.Price +` </h5>
+                <button class="detbtns btn" id="detbtn-`+ index +`">View details</button>
+            `
+        
+            let newProd = document.createElement("div");
+            newProd.classList.add('productcard');
+            newProd.innerHTML = html;
+            OuterDiv.append(newProd);
+        
+        }
+        
+        function GenerateStockLabel(stock){
+        let stocklabel = document.createElement('h5');
+        stocklabel.classList.add('stock');
+        
+        if (stock > 0){
+            stocklabel.innerHTML='In stock';
+            stocklabel.classList.add('text-success');
+        }
+        else{
+            stocklabel.innerHTML='Out of stock';
+            stocklabel.classList.add('text-warning');
+        }
+        return stocklabel.outerHTML;
+        }
+        
+        
+        function GetProductIndex(id){
+            var indstart = id.indexOf('-') + 1;
+            var indend = id.length;
+            return Number(id.substring(indstart, indend));
+        }
+        
+       
+
+        function GoToProductDetails(event){
+        var index = GetProductIndex(event.target.id);
+        localStorage.Product = JSON.stringify(ArrayOfProducts[index]);
+        window.location = "ViewUserPfp.html";
+        }
+        
+        function AssignAllEvents(){
+            var btns = document.getElementById("Original_Poster");
+            var titles = document.getElementsByClassName("title");
+            var thumbs = document.getElementsByClassName("thumb");
+         
+        for (let i = 0; i < btns.length; i++){
+            btns[i].addEventListener('click', GoToProductDetails);
+            titles[i].addEventListener('click', GoToProductDetails);
+            thumbs[i].addEventListener('click', GoToProductDetails);
+        }
+        }
+
+</script>
 
 
 <!--related shiz-->
 <div class="small-container">
     <div class="row row-2">
-        <h2>Related Products</h2>
+        <h2>Other Products</h2>
         <p>View more</p>
     </div>
 </div>
-
-
-
 <!--Products-->
 <div class="small-container">
-<div class="row">
-    <div class="col-4">
-        <img src="images/product-1.jpg">
-        <h4>Red puma shirt</h4>
-        <div class="rating">
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-        </div>
-        <p>$500.00</p>
+    <div id="productsDiv" class="container">
+     
+    </div>
     </div>
     <!--Lahi na nani na product-->
-    <div class="col-4">
-        <img src="images/product-2.jpg">
-        <h4>Hrx shoes</h4>
-        <div class="rating">
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-        </div>
-        <p>$999.99</p>
-    </div>
-    <!--Lahi na nani na product-->
-    <div class="col-4">
-        <img src="images/product-3.jpg"  >
-        <h4>Jogging Pants</h4>
-        <div class="rating">
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-        </div>
-        <p>$550.00</p>
-    </div>
-    <!--Lahi na nani na product-->
-    <div class="col-4">
-        <img src="images/product-4.jpg">
-        <h4>Plain blue Puma polo</h4>
-        <div class="rating">
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-        </div>
-        <p>$599.00</p>
-    </div>
-    <!--Lahi na nani na product-->
-    
+        
 </div>
 <div class="page-btn">
 <span>1</span>
@@ -187,9 +689,18 @@
         <p class="copyright">Copyright 2022 - TradinGo</p>
     </div>
 </div>
-
 <!--Toggle for js menu shits-->
 <script>
+ const ChatUser = document.getElementById("Chat-user");
+
+// Add a click event listener to the button
+ChatUser.addEventListener("click", function() {
+    // Use the location object to navigate to a new page
+    location.href = "Messages.html";
+});
+
+
+
     var MenuItems = document.getElementById("MenuItems");
 
     MenuItems.style.maxHeight = "0px";
@@ -203,28 +714,10 @@
         }
     }
 </script>
-<!--js para sa ano img img-->
-<script>
-var ProductImg = document.getElementById("ProductImg");
-var SmallImg = document.getElementsByClassName("small-img");
 
-SmallImg[0].onclick = function()
-{
-    ProductImg.src = SmallImg[0].src;
-}
-SmallImg[1].onclick = function()
-{
-    ProductImg.src = SmallImg[1].src;
-}
-SmallImg[2].onclick = function()
-{
-    ProductImg.src = SmallImg[2].src;
-}
-SmallImg[3].onclick = function()
-{
-    ProductImg.src = SmallImg[3].src;
-}
 
-</script>
+
+
+
 </body>
 </html>

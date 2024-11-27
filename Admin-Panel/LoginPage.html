@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+      #LoginForm {
+    height: 240px !important;
+}
+.form-container span {
+
+    padding-bottom: 10px !important;
+}
+  </style>
+    <meta charset="UTF-8">
+   
+    <title>
+    Admin Login - TradinGo
+    </title>
+    <link rel="stylesheet" href="specialstyle.css">
+    
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+    
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+</head>
+<body>
+<!--- header ni boy --->
+<div class="container">
+<div class="navbar">
+    <div>
+        <!---logo put maya here --->
+        <img src="LogoForNavBar.png"  width="125px" >
+    </div>
+    <nav>
+        <ul id="MenuItems">
+       
+        </ul>
+    </nav>
+    <div class="carticonPad">
+    
+</div>
+
+ </div>
+</div>
+<!--acc page-->
+<div class="account-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+
+            </div>
+            <div class="col-2">
+            <div class="form-container">
+<div class="form-btn">
+    <span onclick="login()">Admin Login</span>
+ 
+   
+</div>
+<form id="LoginForm">
+    <input type="text" placeholder="Email" id="emailLogin" >
+
+    <input type="password" placeholder="Password" id="passwordLogin" >
+
+    <div>
+  <input type="checkbox" id="TogglePass" onclick="TogglepassLogin()">Show Password</input>
+    </div>
+  
+
+    <button type="button" id="submitDataLogin" class="btn">Log in</button>
+   
+</form>
+<!-- 
+   <hr id="Indicator">
+     <span onclick="register()">Register</span>
+  <a href="">Forgot password</a>
+  <form id="RegForm">
+    <input type="text" placeholder="First name" id="fname">
+    <input type="text" placeholder="Last Name" id="lname">
+    <input type="email" placeholder="Email" id="email">
+    <input type="password" placeholder="Password" id="password">
+    <input type="checkbox" id="TogglePass" onclick="Togglepass()">Show Password
+    <button type="button" id="submitData" name="submitData" class="btn">Register</button>
+</form>
+
+-->
+
+            </div>   
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--footer-->
+<div class="footer">
+    
+</div>
+
+<!--show pass-->
+<script>
+    function Togglepass() {
+      var x = document.getElementById("password");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
+    </script>
+
+<script>
+      function TogglepassLogin() {
+      var y = document.getElementById("passwordLogin");
+      if (y.type === "password") {
+        y.type = "text";
+      } else {
+        y.type = "password";
+      }
+    }
+</script>
+
+
+<!--Toggle for js menu shits-->
+<script>
+    var MenuItems = document.getElementById("MenuItems");
+
+    MenuItems.style.maxHeight = "0px";
+
+    function menutoggle(){
+        if(MenuItems.style.maxHeight == "0px"){
+            MenuItems.style.maxHeight = "200px";
+        }
+        else{
+            MenuItems.style.maxHeight = "0px";
+        }
+    }
+</script>
+<!--Toggle for js form shits-->
+<script>
+
+var LoginForm = document.getElementById("LoginForm");
+var RegForm = document.getElementById("RegForm");
+var Indicator = document.getElementById("Indicator");
+
+function register(){
+    
+    RegForm.style.transform = "translateX(0px)";
+    LoginForm.style.transform = "translateX(0px)";
+    Indicator.style.transform = "translateX(100px)";
+
+}
+
+function login(){
+    
+    RegForm.style.transform = "translateX(300px)";
+    LoginForm.style.transform = "translateX(300px)";
+    Indicator.style.transform = "translateX(0px)";
+
+}
+
+</script>
+<!--sign in / login-->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyB9XhRzkpjkyuAZLaMSxaLQJs7DwwNESmY",
+    authDomain: "tradingo-824d6.firebaseapp.com",
+    databaseURL: "https://tradingo-824d6-default-rtdb.firebaseio.com",
+    projectId: "tradingo-824d6",
+    storageBucket: "tradingo-824d6.appspot.com",
+    messagingSenderId: "273813724823",
+    appId: "1:273813724823:web:5af639aa92782227fe53d2",
+    measurementId: "G-K74SN99P90"
+  };
+
+  const app = initializeApp(firebaseConfig);
+
+  import { getAuth, signInWithEmailAndPassword,  signOut, updateProfile, sendSignInLinkToEmail, onAuthStateChanged, createUserWithEmailAndPassword }
+   from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js";
+
+   import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-analytics.js";
+
+  import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL}
+  from"https://www.gstatic.com/firebasejs/9.13.0/firebase-storage.js"
+
+  import { getDatabase, get,child, set, ref, update, remove, onValue}
+   from "https://www.gstatic.com/firebasejs/9.13.0/firebase-database.js";
+
+ const realdb = getDatabase();
+  const dbref = ref(realdb);
+    const auth = getAuth(app);
+
+
+//detect if user is logged in
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    swal({
+text: 'You are already logged in',
+type: "success",
+timer: 3000
+})
+ console.log("Admin Logged In");
+
+    const uid = user.uid;
+   console.log(uid);
+  } else {
+    swal({
+title: 'You are not logged in!',
+imageUrl: 'images/incorrect.png',
+  imageHeight: 1500,
+
+})
+  }
+});
+
+/*
+
+  submitData.addEventListener('click', (e) => {
+    var fname = document.getElementById('fname').value;
+    var lname = document.getElementById('lname').value;
+      var email = document.getElementById('email').value;
+var password = document.getElementById('password').value;
+createUserWithEmailAndPassword(auth, email, password)
+.then((userCredential) => {
+// Signed in 
+const user = userCredential.user;
+// ...
+var fullName = fname + " " + lname;
+var today = new Date();
+var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+var sgdate = date+' '+time;
+set(ref(realdb, 'Admin/' ), {
+
+Full_Name: fullName,
+Date_created: sgdate,
+});
+
+swal({
+title: "Registration successful",
+text: 'You can now Log in to your account!',
+type: "success",
+timer: 2000,
+showConfirmButton: true
+}, function(){
+    //RegForm.style.transform = "translateX(300px)";
+    //LoginForm.style.transform = "translateX(300px)";
+    //Indicator.style.transform = "translateX(0px)";
+});
+      })
+      .catch((error) => {
+          swal({
+title: 'Oops!',
+imageUrl: 'images/incorrect.png',
+  imageHeight: 1500,
+text: (error),
+
+})
+  })
+
+});
+*/
+
+//login
+submitDataLogin.addEventListener('click', (e) => {
+      var email = document.getElementById('emailLogin').value;
+var password = document.getElementById('passwordLogin').value;
+
+signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    console.log("Admin Logged in");
+    const user = userCredential.user;
+    window.location = 'AdminPanel.html';
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log("Piste");
+  });
+})
+
+
+</script>
+
+
+
+
+</body>
+</html>

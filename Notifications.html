@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+     h2{
+        text-align: center;
+        padding-top: 50px;
+        padding-bottom: 100px;
+    }
+.table{
+    padding-top: 150px;
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    bottom: 30%;
+    transform: translate(-50%, -50%);
+        height: 300px;
+    width: 1100px;
+    text-align: center;
+}
+.table th{
+    height: 10px;
+}   
+
+</style>
+<body>
+    <meta charset="UTF-8">
+   
+    <title>
+    Notifications - TradinGo
+    </title>
+    <link rel="stylesheet" href="specialstyle.css">
+    
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+        
+<!--- header ni boy --->
+<div class="container">
+<div class="navbar">
+    <div>
+        <!---logo put maya here --->
+        <img src="images/LogoForNavBar.png"  width="125px" >
+    </div>
+    <nav>
+        <ul id="MenuItems">
+            <li><a href="TradinGo.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+           <li><a href="Profile.html">Profile</a></li>
+           <li><a href="MessageList.html">Messages</a></li>         
+          
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+    <div class="carticonPad">
+    <img src="images/cartIcon.png" id="TradeIcon" width="40px" height="40px">    
+</div>
+<i id="BellIcon" class="fa fa-bell" style="font-size:24px"></i>
+<img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
+ </div>
+</div>
+
+
+<h2>Notifications</h2>  
+
+    <table class="table">
+        <thead>
+          <tr>
+           
+            <th scope="col">Offer</th>
+            <th scope="col">Want</th>
+            <th scope="col">Sender</th>
+            <th scope="col">Creator</th>
+            <th scope="col">Name</th>
+
+          </tr>
+        </thead>
+      
+        <tbody id="productsDiv" class="container"> 
+
+ </div>
+        </tbody>
+   
+      </table>
+
+
+      <script>
+        var MenuItems = document.getElementById("MenuItems");
+    
+        MenuItems.style.maxHeight = "0px";
+    
+        function menutoggle(){
+            if(MenuItems.style.maxHeight == "0px"){
+                MenuItems.style.maxHeight = "200px";
+            }
+            else{
+                MenuItems.style.maxHeight = "0px";
+            }
+        }
+    </script>
+
+
+<script type="module">
+ let userId;
+    let DisplayName;
+
+    function getShortTitle(title){
+        if(title.length > 49) title.substring(0, 47);
+        else return title;
+        return title + "...";
+    }
+
+//imports
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyB9XhRzkpjkyuAZLaMSxaLQJs7DwwNESmY",
+    authDomain: "tradingo-824d6.firebaseapp.com",
+    databaseURL: "https://tradingo-824d6-default-rtdb.firebaseio.com",
+    projectId: "tradingo-824d6",
+    storageBucket: "tradingo-824d6.appspot.com",
+    messagingSenderId: "273813724823",
+    appId: "1:273813724823:web:5af639aa92782227fe53d2",
+    measurementId: "G-K74SN99P90"
+  };
+
+  const app = initializeApp(firebaseConfig);
+
+  import { getAuth, signInWithEmailAndPassword,  signOut, updateProfile, sendSignInLinkToEmail, onAuthStateChanged }
+   from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js";
+
+   import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-analytics.js";
+
+  import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL}
+  from"https://www.gstatic.com/firebasejs/9.13.0/firebase-storage.js"
+
+  import { getDatabase, get,child, set, ref, update, remove}
+   from "https://www.gstatic.com/firebasejs/9.13.0/firebase-database.js";
+
+ const realdb = getDatabase();
+  const dbref = ref(realdb);
+    const auth = getAuth(app);
+
+
+var OuterDiv = document.getElementById('productsDiv');
+var ArrayOfProducts = [];
+window.addEventListener('load', GetAllProducts);
+
+function GetAllProducts() {
+    onAuthStateChanged(auth, (user) => {
+        userId = user.uid;
+ console.log(userId);
+
+    get(child(dbref, 'users/' + userId + '/Notification' ))
+    .then((snapshot) =>{
+        console.log(snapshot.val());
+        if(snapshot.val() === null){
+            console.log('Potangina');
+        }
+        snapshot.forEach(prod =>{
+ArrayOfProducts.push(prod.val());
+        });
+
+        AddAllProducts();
+    })
+})
+}
+
+document.getElementById('TradeIcon').addEventListener('click', function() {
+ 
+ onAuthStateChanged(auth, (user) => {
+ if (user  == null) {
+   window.location = 'account.html';
+ } else {
+  window.location = 'Transactions.html';
+ }
+});
+});
+
+
+document.getElementById('BellIcon').addEventListener('click', function() {
+ onAuthStateChanged(auth, (user) => {
+ if (user  == null) {
+   window.location = 'account.html';
+ } else {
+  window.location = 'Notifications.html';
+ }
+});
+});
+
+function AddAllProducts(){
+    let i = 0;
+
+    ArrayOfProducts.forEach(prod =>{
+AddAProduct(prod, i++);
+    });
+    AssignAllEvents();
+}
+
+
+
+function AddAProduct(product, index){
+   
+
+onAuthStateChanged(auth, (user) => {
+        userId = user.uid;
+ console.log(userId);
+
+get(child(dbref, 'users/' + userId + '/displayName/' ))
+    .then((snapshot) =>{
+        console.log(snapshot.val());
+       DisplayName = snapshot.val();
+       })
+})
+
+
+    let html = 
+    `
+    <td class="titleProd" id="title-`+ index+`"> `+ getShortTitle(product.ProductTitle) +` </td>
+    
+      <td>${product.WantItem}</td>
+
+  <td>${product.Sender}</td>
+  
+      <td>${product.UploaderUid}</td>
+
+        
+        <td>${product.ProductTrader}</td>
+
+        <button class="detbtns btn" id="detbtn-`+ index +`">View</button>
+     
+    `
+// 
+    let newProd = document.createElement("tr");
+    newProd.classList.add('productcard');
+    newProd.innerHTML = html;
+    OuterDiv.append(newProd);
+
+}
+
+function GenerateStockLabel(stock){
+let stocklabel = document.createElement('h5');
+stocklabel.classList.add('stock');
+
+if (stock > 0){
+    stocklabel.innerHTML='In stock';
+    stocklabel.classList.add('text-success');
+}
+else{
+    stocklabel.innerHTML='Out of stock';
+    stocklabel.classList.add('text-warning');
+}
+return stocklabel.outerHTML;
+}
+
+function GetUl(array){
+    let ul = document.createElement("ul");
+    ul.classList.add('points');
+
+    array.forEach(element => {
+let li = document.createElement("li");
+li.innerText=element;
+ul.append(li);
+    });
+    return ul.outerHTML;
+}
+
+function GetProductIndex(id){
+    var indstart = id.indexOf('-') + 1;
+    var indend = id.length;
+    return Number(id.substring(indstart, indend));
+}
+
+function GoToProductDetails(event){
+var index = GetProductIndex(event.target.id);
+localStorage.Product = JSON.stringify(ArrayOfProducts[index]);
+window.location = "product-details.html";
+}
+
+function AssignAllEvents(){
+    var btns = document.getElementsByClassName("detbtns");
+    var titles = document.getElementsByClassName("titleProd");
+   
+ 
+for (let i = 0; i < btns.length; i++){
+    btns[i].addEventListener('click', GoToProductDetails);
+    titles[i].addEventListener('click', GoToProductDetails);
+   
+}
+}
+</script>
+
+</body>
+</html>

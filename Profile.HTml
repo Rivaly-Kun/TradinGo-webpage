@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Profile - TradinGo</title>
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+<style>
+  button{
+	border: 0;
+  padding: 4px;
+}
+#upload-btn{
+  background-color: green;
+  border-radius: 5px;
+  color: #fff;
+}
+#CancelBtn{
+  background-color: red !important;
+  color: #fff;
+}
+.editbtn {
+  background-color: #FF7E57 !important;
+  border-radius: 12px;
+}
+.detbtns {
+   background-color: #007bff !important;
+   border-radius: 12px;
+}
+.delbtnz {
+  background-color:red !important;
+  border-radius: 12px;
+}
+#file-input{
+  border: 1px black;  
+ 
+}
+  .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #FF7E57 !important;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #FF7E57 !important;
+    border-color: #FF7E57 !important;
+}
+  body{
+    font-family: 'Poppins', sans-serif !important;
+}
+  .navbar{
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+nav{
+    flex: 1;
+    text-align: right;
+}
+nav ul{
+    display: inline-block;
+    list-style: none;
+}
+nav ul li{
+    display: inline-block;
+    margin-left: 20px;
+}
+.carticonPad{
+  display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 20px;
+    margin-top: 5px;
+    transition: transform 0.5s;
+}
+.carticonPad:hover{
+    transform: translateY(-5px);
+}
+#BellIcon{
+    padding-bottom: 5px;
+    padding-left: 20px;
+}
+.container{
+max-width: 1300px;
+margin: auto;
+padding-left: 25px;
+padding-right: 25px;
+}
+a{
+    text-decoration: none !important;
+    color: #555;
+}
+p{
+    color: #555;
+}
+.carticonPad #circle {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: red;
+  margin-left: 5px;
+  display: none;
+}
+#circle2 {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: red;
+  margin-left: 5px;
+  display: none;
+}
+
+</style>
+</head>
+<body>
+
+ 
+
+
+	<section ">
+    
+		<div class="container">
+      <div class="navbar">
+        <div>
+            <!---logo put maya here --->
+            <img src="images/LogoForNavBar.png"  width="125px" >
+        </div>
+        <nav>
+            <ul id="MenuItems">
+              <li><a href="TradinGo.html">Home</a></li>
+              <li><a href="products.html">Products</a></li>
+             <li><a href="Profile.html">Profile</a></li>
+             <li><a href="MessageList.html">Messages</a></li>         
+            
+              <li><a href="about.html">About</a></li>
+            </ul>
+        </nav>
+        <div class="carticonPad">
+        <img id="TradeIcon" src="images/cartIcon.png" width="40px" height="40px">
+        <div id="circle"></div>
+    </div>
+    <i id="BellIcon" class="fa fa-bell" style="font-size:24px"></i>
+    <div id="circle2"></div>
+     </div>
+			<div class="bg-white shadow rounded-lg d-block d-sm-flex">
+				<div class="profile-tab-nav border-right">
+					<div class="p-4">
+						<div class="img-circle text-center mb-3" > 
+              
+              <!--Pfp-->
+
+							<img src="" alt="" id="PfpImg" class="shadow">
+						</div>
+						<h4 class="text-center" id="UserName"> </h4>
+					</div>
+					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+						<a class="nav-link active" id="account-tab" data-toggle="pill" href="#account" role="tab" aria-controls="account" aria-selected="true">
+							<i class="fa fa-home text-center mr-1"></i> 
+							Account
+						</a>
+						<a class="nav-link" id="password-tab" data-toggle="pill" href="#password" role="tab" aria-controls="password" aria-selected="false">
+							<i class="fa fa-handshake-o"></i> 
+							Trades
+						</a>
+						<a class="nav-link" id="security-tab" data-toggle="pill" href="#security" role="tab" aria-controls="security" aria-selected="false">
+							<i class="fa fa-tv text-center mr-1"></i> 
+							Your Products
+						</a>
+						<a class="nav-link" id="application-tab" data-toggle="pill" href="#application" role="tab" aria-controls="application" aria-selected="false">
+							<i class="">&#43;</i> 
+							Add Products
+						</a>
+						
+					</div>
+				</div>
+				<div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
+					<div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
+
+<!--Pfp Btns-->
+
+<input type="file" id="file-input">
+<button id="upload-btn">Upload</button>
+					
+						<button id="ChangePassBtn" class="ChangePassBtn">Change Password</button>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+								  	<label>First Name</label>
+								  	<input type="text" class="form-control" id="FnameInp">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+								  	<label>Last Name</label>
+								  	<input type="text" class="form-control" id="LnameInp">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+								  	<label>Email</label>
+								  	<input type="text" class="form-control" id="EmailInp">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+								  	<label>Phone number</label>
+								  	<input type="text" class="form-control" id="contctNum">
+								</div>
+							</div>
+              
+							<div class="col-md-12">
+								<div class="form-group">
+								  	<label>Bio</label>
+									<textarea class="form-control" rows="4" id="bio"></textarea>
+								</div>
+							</div>
+						</div>
+						<div>
+							<button class="btn btn-primary" id="UpdateBtn">Update</button>
+							<button id="CancelBtn" class="btn btn-light" style="margin-right: 350px;">Cancel</button>
+              	<button id="LogoutBtn" class="Btn LogoutBtn" style="margin-left: 320px;">Logout</button>
+						</div>
+					</div>
+
+
+					<div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
+						<h3 class="mb-4">Successful Trades</h3>
+						<div class="row">
+							
+							<table class="table" border="2" style="border-collapse:collapse;">
+								<thead>
+								  <tr>
+								   
+									<th scope="col">Transaction No.</th>
+									<th scope="col">Your Item</th>
+									<th scope="col">Traded Items</th>
+									<th scope="col">Trader</th>
+						
+								  </tr>
+								</thead>
+							  
+								<tbody id="productsDiv" class="container"> 
+						
+						
+								</tbody>
+						   
+							  </table>
+						
+
+						</div>
+						<div>	
+						</div>
+					</div>
+
+					<div class="tab-pane fade" id="security" role="tabpanel" aria-labelledby="security-tab">
+						<h3 class="mb-4">Your Products</h3>
+						
+						<div class="row">
+							<table class="table" border="2" style="border-collapse:collapse;">
+								<thead>
+								  <tr>
+
+									<th scope="col">ProductTitle</th>
+									<th scope="col">Description</th>
+									<th scope="col">Price</th>
+									<th scope="col">Category</th>
+									<th scope="col">Stock</th>
+						
+								  </tr>
+								</thead>
+							  
+								<tbody id="YourProds" class="container"> 
+						
+						
+								</tbody>
+						   
+							  </table>
+						
+							  <div>	
+							</div>
+					</div>
+					</div>
+
+					
+
+					
+	</section>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+	<script type="module">
+let userUid;
+ 
+
+
+function getShortTitle(title){
+        if(title.length > 10) title.substring(0, 47);
+        else return title;
+        return title + "...";
+    }
+
+//imports
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyB9XhRzkpjkyuAZLaMSxaLQJs7DwwNESmY",
+    authDomain: "tradingo-824d6.firebaseapp.com",
+    databaseURL: "https://tradingo-824d6-default-rtdb.firebaseio.com",
+    projectId: "tradingo-824d6",
+    storageBucket: "tradingo-824d6.appspot.com",
+    messagingSenderId: "273813724823",
+    appId: "1:273813724823:web:5af639aa92782227fe53d2",
+    measurementId: "G-K74SN99P90"
+  };
+
+  const app = initializeApp(firebaseConfig);
+
+  import { getAuth, signInWithEmailAndPassword,  signOut, updateProfile, sendSignInLinkToEmail, onAuthStateChanged, updateEmail  }
+   from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js";
+
+   import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-analytics.js";
+
+  import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL}
+  from"https://www.gstatic.com/firebasejs/9.13.0/firebase-storage.js"
+
+  import { getDatabase, get,child, set, ref, update, remove, onValue, push}
+   from "https://www.gstatic.com/firebasejs/9.13.0/firebase-database.js";
+
+ const realdb = getDatabase();
+  const dbref = ref(realdb);
+    const auth = getAuth(app);
+
+// Initialize Firebase
+
+const database = getDatabase(app);
+const storage = getStorage(app);
+
+// Get references to the file input and upload button
+const fileInput = document.getElementById('file-input');
+const uploadBtn = document.getElementById('upload-btn');
+
+
+//detect user has notif
+onAuthStateChanged(auth, (user) => {
+    const dbref = ref(realdb);
+
+let userId = user.uid;
+ console.log(userId);
+
+ get(child(dbref, 'users/' + userId + '/Notification' ))
+    .then((snapshot) =>{
+       // console.log(snapshot.val());
+        if(snapshot.val() === null){
+            //console.log('Potangina');
+        }else{  
+           // console.log('yawa');
+           var circle2 = document.getElementById("circle2");
+circle2.style.display = "block"; /* show the circle */
+
+        }
+    })
+
+    get(child(dbref, 'users/' + userId + '/Trades' + '/Pending_Trade' ))
+    .then((snapshot) =>{
+        console.log(snapshot.val());
+        if(snapshot.val() === null){
+            console.log('shesh par');
+        }else{
+            console.log('erp erp par');
+            var circle = document.getElementById("circle");
+circle.style.display = "block"; /* show the circle */
+
+        }
+    })
+
+})
+
+document.getElementById('TradeIcon').addEventListener('click', function() {
+ 
+ onAuthStateChanged(auth, (user) => {
+ if (user  == null) {
+   window.location = 'account.html';
+ } else {
+  window.location = 'Transactions.html';
+ }
+});
+});
+
+
+document.getElementById('BellIcon').addEventListener('click', function() {
+ onAuthStateChanged(auth, (user) => {
+ if (user  == null) {
+   window.location = 'account.html';
+ } else {
+  window.location = 'Notifications.html';
+ }
+});
+});
+
+
+uploadBtn.addEventListener('click', function() {
+    onAuthStateChanged(auth, (user) => {
+        userUid = user.uid;
+        // Get the selected file from the file input
+        var file = fileInput.files[0];
+
+        // Get a storage reference for the image file
+        var storageRef = sRef(getStorage(app), 'Pfp/' + file.name);
+
+        // Upload the image file to Firebase Storage
+        uploadBytesResumable(storageRef, file).then(function(snapshot) {
+            console.log('Uploaded a blob or file!');
+
+            // Get the download URL of the uploaded image
+            getDownloadURL(storageRef).then(function(url) {
+                console.log('Image URL:', url);
+Swal.fire('Upload success!')
+                // Save the image download URL to Firebase Realtime Database
+                set(ref(database, 'users/' + userUid + '/Pfp'), url).then (() => {
+
+ window.location.reload();
+
+})
+
+               
+            });
+        });
+    });
+});
+
+
+    
+
+//Get Pfp 
+//inganiaon ra diay
+onAuthStateChanged(auth, (user) => {
+  userUid = user.uid;
+
+  // set the image src attribute to the URL value
+  get(child(dbref, 'users/' + userUid + '/Pfp' ))
+      .then((snapshot) =>{
+
+        let urlVal = snapshot.val();
+        console.log(urlVal);
+          document.getElementById('PfpImg').src = urlVal;
+      });
+
+});
+
+
+
+
+	//detect if user is logged in
+onAuthStateChanged(auth, (user) => {
+ if (user  == null) {
+   window.location = 'account.html';
+ } else {
+ 
+ }
+});
+
+//CancelBtn
+CancelBtn.addEventListener('click', (e) => {
+  location.reload();
+});
+
+
+		//Logout
+		LogoutBtn.addEventListener('click', (e) => {
+const auth = getAuth();
+signOut(auth).then(() => {
+  Swal.fire('Logged out!')
+  
+    window.location.href = "TradinGo.html";
+}).catch((error) => {
+  // An error happened.
+});
+});
+
+//add product
+document.getElementById('application-tab').addEventListener('click', function() {
+ 
+   window.location = 'admin.html';
+ 
+});
+
+
+
+
+onAuthStateChanged(auth, (user) => {
+	var  userId = user.uid;
+   // console.log(userId);
+  if (user) {
+   
+  } else {
+    window.location.href = "account.html";
+  }
+
+//let DisplayName;
+
+//get sa mga names details and shitz ni  user
+get(child(dbref, 'users/' + userId + '/First_Name' ))
+      .then((snapshot) =>{
+        let FName = snapshot.val();
+
+		get(child(dbref, 'users/' + userId + '/Last_Name' ))
+      .then((snapshot) =>{
+        let LName = snapshot.val();
+		
+		get(child(dbref, 'users/' + userId + '/email' ))
+      .then((snapshot) =>{
+        let email= snapshot.val();
+
+		get(child(dbref, 'users/' + userId + '/contnum' ))
+      .then((snapshot) =>{
+        let contctNum = snapshot.val();
+
+		get(child(dbref, 'users/' + userId + '/bio' ))
+      .then((snapshot) =>{
+        let bio = snapshot.val();
+
+		let trep = FName + " " + LName;
+		//console.log(trep);
+
+		var inputElement = document.getElementById("UserName");
+inputElement.innerText  = trep;
+
+document.getElementById("FnameInp").value =FName ;
+document.getElementById("LnameInp").value =LName ;
+document.getElementById("EmailInp").value =email ;
+document.getElementById("contctNum").value =contctNum ;
+document.getElementById("bio").value =bio ;
+});
+});
+});
+});
+});
+});
+
+
+// Update details
+UpdateBtn.addEventListener('click', (e) => {
+  onAuthStateChanged(auth, (user) => {
+    var userId = user.uid;
+
+    const FnameInp = document.getElementById("FnameInp").value;
+    const LnameInp = document.getElementById("LnameInp").value;
+    const EmailInp = document.getElementById("EmailInp").value;
+    const contctNum = document.getElementById("contctNum").value;
+    const bio = document.getElementById("bio").value;
+
+    console.log(LnameInp);
+    console.log(FnameInp);
+
+    // Update user details
+    update(ref(realdb,'users/'+ userId), {
+      First_Name: FnameInp,
+      Last_Name: LnameInp,
+      email: EmailInp,
+      bio: bio,
+      contnum: contctNum
+    }).then(() => {
+      // Update the email
+      updateEmail(user, EmailInp).then(() => {
+        Swal.fire('Update success!');
+        location.reload();
+      }).catch((error) => {
+        console.log(error);
+        Swal.fire('Error updating email');
+      });
+    }).catch((error) => {
+      console.log(error);
+      Swal.fire('Error updating details');
+    });
+  });
+});
+
+ChangePassBtn.addEventListener('click', (e) => {
+  Swal.fire('Im tired bro :-(');
+});
+
+
+
+var OuterDiv = document.getElementById('productsDiv');
+
+var ArrayOfProducts = [];
+
+window.addEventListener('load', GetAllProducts);
+
+function GetAllProducts() {
+    onAuthStateChanged(auth, (user) => {
+        userUid = user.uid;
+ //console.log(userUid);
+
+    get(child(dbref, 'users/' + userUid + '/Trades' + '/Finished_trades' ))
+    .then((snapshot) =>{
+       // console.log(snapshot.val());
+        snapshot.forEach(prod =>{
+ArrayOfProducts.push(prod.val());
+        });
+      
+
+        AddAllProducts();
+    })
+})
+}
+
+
+function AddAllProducts(){
+    let i = 0;
+
+    ArrayOfProducts.forEach(prod =>{
+AddAProduct(prod, i++);
+    });
+   
+}
+
+function AddAProduct(Transaction, index){
+
+    let html = 
+    `
+    <td>`+getShortTitle(Transaction.TransActNo)+`</td>
+      <td>${Transaction.ProductTraded}</td>
+    <td class="titleProd" id="title-`+ index+`"> `+ getShortTitle(Transaction.ProductTitle) +` </td>
+      <td>${Transaction.Trader}</td>
+
+      
+    `
+// 
+    let newProd = document.createElement("tr");
+    newProd.classList.add('productcard');
+    newProd.innerHTML = html;
+    OuterDiv.append(newProd);
+
+}
+
+/*
+Your Products
+*/
+
+var OuterDivs = document.getElementById('YourProds');
+var ArrayOfProduct = [];
+let myArray = [];
+
+window.addEventListener('load', GetAllProduct);
+
+function GetAllProduct() {
+      
+ //console.log(userUid);
+    get(child(dbref, 'Products'))
+    .then((snapshot) =>{
+//console.log((child(dbref, 'users/')));
+
+let objString = JSON.stringify(snapshot.val());
+
+       myArray.push(objString); 
+
+        snapshot.forEach(prod =>{
+ArrayOfProduct.push(prod.val());
+        });
+      
+
+        AddAllProduct();
+    })
+
+}
+
+function AddAllProduct(){
+    let i = 0;
+
+    ArrayOfProduct.forEach(prod =>{
+AddAProducts(prod, i++);
+    });
+    AssignAllEvents();
+    AssignEvents();
+}
+
+
+
+function AddAProducts(Users, index){
+  const auth = getAuth(app);
+            onAuthStateChanged(auth, (user) => {
+              let  userUid = user.uid;
+//console.log(userUid);
+if (userUid == Users.UploaderUid){
+
+
+    let html = 
+    `
+    <td class="ProductTitle" id="ProductTitle-`+ index+`">${Users.ProductTitle}</td>
+    <td class="Category"  id="Category-`+ index+`" >${Users.Category}</td>
+    <td class="Description"  id="Description-`+ index+`">${Users.Description}</td>
+    <td class="Price"  id="Price-`+ index+`">${Users.Price}</td>
+    <td class="Stock"  id="Stock-`+ index+`">${Users.Stock}</td>
+
+     
+      <button  class="editbtn " id="EditBtn-`+ index +`">Edit</button>
+      <button class="detbtns " id="detbtn-`+ index +`">Update</button>
+      <button class="delbtnz " id="Delbtn-`+ index +`">Delete</button>
+    `
+// 
+    let newProdz = document.createElement("tr");
+    newProdz.classList.add('productcard');
+    newProdz.innerHTML = html;
+    OuterDivs.append(newProdz);
+
+    newProdz.querySelector('.detbtns').addEventListener('click', accept);
+    newProdz.querySelector('.delbtnz').addEventListener('click', reject);
+    newProdz.querySelector('.editbtn').addEventListener('click', edit);
+}
+  })
+}
+
+
+
+function GetProductIndex(id){
+    var indstart = id.indexOf('-') + 1;
+    var indend = id.length;
+    return Number(id.substring(indstart, indend));
+}
+
+function accept(event){
+
+var index = GetProductIndex(event.target.id);
+localStorage.Product = JSON.stringify(ArrayOfProduct[index]);
+//console.log(localStorage.Product); 
+let product = localStorage.Product;
+            product=JSON.parse(product);
+
+console.log(product);
+
+let ProductTitleVar; 
+let CategoryVar;
+let DescriptionVar;
+let PriceVar;
+let StockVar;
+
+
+ let ProductTitle = document.getElementById("ProductTitle-" + index);
+ let Category = document.getElementById("Category-" + index);
+ let Description = document.getElementById("Description-" + index);
+ let Price = document.getElementById("Price-" + index);
+ let Stock = document.getElementById("Stock-" + index);
+
+
+ ProductTitleVar = ProductTitle.textContent;
+ CategoryVar = Category.textContent;
+ DescriptionVar = Description.textContent;
+ PriceVar = Price.textContent;
+ StockVar = Stock.textContent;
+
+
+//add pa admin login tanga ka kaseh
+
+let randomString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+
+update(ref(realdb,'Products/' + product.ProductUid),{ //mao ni si sender
+    ProductTitle: ProductTitleVar,
+    Category:CategoryVar,
+    Description:DescriptionVar,
+    Price:PriceVar,
+    Stock:StockVar
+    }).then (() => {
+//swal here
+Swal.fire('Edited successfully!')
+
+})
+
+}
+
+//para kung reject
+function reject(event){
+console.log("NoSHet MINECRAFT");
+var index = GetProductIndex(event.target.id);
+localStorage.Product = JSON.stringify(ArrayOfProduct[index]);
+console.log(localStorage.Product);
+let product = localStorage.Product;
+            product=JSON.parse(product);
+
+            let ProductTitleVar; 
+
+            let ProductTitle = document.getElementById("ProductTitle-" + index);
+            ProductTitleVar = ProductTitle.textContent;
+           let prodname = ProductTitleVar;
+
+
+let randomString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+
+
+remove(child(dbref, 'Products/' + product.ProductUid))
+   .then((snapshot) =>{
+    Swal.fire('Deleted successfully!')
+       setTimeout(function() {
+  console.log("3 seconds have passed.");
+  location.reload();
+}, 1000);
+       
+       });
+  
+}
+
+function AssignAllEvents(){
+    var btns = document.getElementsByClassName("detbtns");
+    var titles = document.getElementsByClassName("titleProd");
+   
+ 
+for (let i = 0; i < btns.length; i++){
+    btns[i].addEventListener('click', accept);
+   
+}
+}
+
+function AssignEvents(){
+    var btnz = document.getElementsByClassName("delbtnz");
+    var titles = document.getElementsByClassName("titleProd");
+   
+ 
+for (let i = 0; i < btnz.length; i++){
+    btnz[i].addEventListener('click', reject);
+}
+}
+
+let counter = 0;
+
+function edit(event) {  
+
+  counter++;
+ //AHHAHAH kapuy debug murag tanga di mo unwrap ang td na ge butang para sa input
+  if (counter === 4) {
+    location.reload();
+  }
+
+  console.log("NoSHet MINECRAFT");
+  var index = GetProductIndex(event.target.id);
+  console.log(index);
+
+  let ProductTitleVar;
+  let CategoryVar;
+  let DescriptionVar;
+  let PriceVar;
+  let StockVar;
+
+  let ProductTitle = document.getElementById("ProductTitle-" + index);
+  let Category = document.getElementById("Category-" + index);
+  let Description = document.getElementById("Description-" + index);
+  let Price = document.getElementById("Price-" + index);
+  let Stock = document.getElementById("Stock-" + index);
+
+  if (ProductTitle.tagName === "TD") {
+    // create input elements with current values
+    let ProductTitleInput = document.createElement("input");
+    ProductTitleInput.type = "text";
+    ProductTitleInput.value = ProductTitle.textContent;
+    ProductTitleInput.className = ProductTitle.className;
+    ProductTitleInput.id = ProductTitle.id;
+
+    let CategoryInput = document.createElement("input");
+    CategoryInput.type = "text";
+    CategoryInput.value = Category.textContent;
+    CategoryInput.className = Category.className;
+    CategoryInput.id = Category.id;
+
+    let DescriptionInput = document.createElement("input");
+    DescriptionInput.value = Description.textContent;
+    DescriptionInput.className = Description.className;
+    DescriptionInput.id = Description.id;
+
+    let PriceInput = document.createElement("input");
+    PriceInput.type = "number";
+    PriceInput.value = Price.textContent;
+    PriceInput.className = Price.className;
+    PriceInput.id = Price.id;
+
+    let StockInput = document.createElement("input");
+    StockInput.type = "number";
+    StockInput.value = Stock.textContent;
+    StockInput.className = Stock.className;
+    StockInput.id = Stock.id;
+
+    // wrap the input elements inside td elements
+    ProductTitleInput = wrapInTD(ProductTitleInput);
+    CategoryInput = wrapInTD(CategoryInput);
+    DescriptionInput = wrapInTD(DescriptionInput);
+    PriceInput = wrapInTD(PriceInput);
+    StockInput = wrapInTD(StockInput);
+
+    // replace the original elements with input elements
+    ProductTitle.replaceWith(ProductTitleInput);
+    Category.replaceWith(CategoryInput);
+    Description.replaceWith(DescriptionInput);
+    Price.replaceWith(PriceInput);
+    Stock.replaceWith(StockInput);
+
+    $(".detbtns ").hide();
+$(".delbtnz ").hide();
+  } else {
+    // create td elements with current values
+    let ProductTitleTD = document.createElement("td");
+    ProductTitleTD.textContent = ProductTitle.value;
+    ProductTitleTD.className = ProductTitle.className;
+    ProductTitleTD.id = ProductTitle.id;
+
+    let CategoryTD = document.createElement("td");
+    CategoryTD.textContent = Category.value;
+    CategoryTD.className = Category.className;
+    CategoryTD.id = Category.id;
+
+    let DescriptionTD = document.createElement("td");
+    DescriptionTD.textContent = Description.value;
+    DescriptionTD.className = Description.className;
+    DescriptionTD.id = Description.id;
+
+    let PriceTD = document.createElement("td");
+    PriceTD.textContent = Price.value;
+    PriceTD.className = Price.className;
+    PriceTD.id = Price.id;
+
+    let StockTD = document.createElement("td");
+    StockTD.textContent = Stock.value;
+    StockTD.className = Stock.className;
+    StockTD.id = Stock.id;
+
+    // replace the input elements with td elements
+    ProductTitle.replaceWith(unwrapTD(ProductTitleTD));
+    Category.replaceWith(unwrapTD(CategoryTD));
+    Description.replaceWith(unwrapTD(DescriptionTD));
+    Price.replaceWith(unwrapTD(PriceTD));
+    Stock.replaceWith(unwrapTD(StockTD));
+
+    $(".detbtns ").show();
+$(".delbtnz ").show();
+  }
+}
+
+function wrapInTD(element) {
+  let td = document.createElement("td");
+  td.appendChild(element);
+  return td;
+}
+
+function unwrapTD(td) {
+  let parent = td.parentNode;
+  let element = td.firstChild;
+  if (parent) {
+    parent.replaceChild(element, td);
+    return element;
+  }
+  return td;
+}
+
+	</script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="
+  https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js
+  "></script>
+  <link href="
+  https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css
+  " rel="stylesheet">
+</body>
+
+<style>
+	h2{
+	  text-align: center;
+	  padding-top: 50px;
+	  padding-bottom: 50px;
+  }
+table {
+  text-align: center;
+  border-collapse: collapse;
+width: 90%; /* Adjust this value to your liking */
+margin: 0 auto; /* Centers the table horizontally */
+border-radius: 10px; /* Rounds the table border */
+overflow: hidden; /* Ensures that the rounded corners are visible */
+table-layout: fixed; /* Makes each <tr> element the same width */
+}
+
+th, td {
+	overflow: hidden;
+  text-align: left;
+padding: 12px;
+border: 1px solid #ddd;
+width: auto; /* Reset the width to auto, since we're using fixed layout */
+}
+
+th {
+background-color: #4CAF50;
+color: white;
+}
+
+tr:nth-child(even) {
+background-color: #f2f2f2;
+}
+
+tr:hover {
+background-color: #ddd;
+}
+
+
+</style>
+</html>
