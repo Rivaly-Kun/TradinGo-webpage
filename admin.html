@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js
+    "></script>
+    <link href="
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css
+    " rel="stylesheet">
+
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Panel</title>
+    <img src="images/LogoForNavBar.png"  width="125px" >
+    <button id="Backbtn">Back</button>
+<style>
+   #Backbtn{ 
+        width: 50px;
+        border-radius: 10px;
+        height: 30px;
+        background-color: #ff523b;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+  
+ 
+    .imagesDivStyle {
+        width: 600px;
+        border: 1px gray solid;
+        padding: 5px;
+    }
+    select 
+    body {
+          font-family: Arial, Helvetica, sans-serif;
+        }
+        label{
+            display: inline-block;
+           width: 120px;
+        }
+        input, 
+        textarea,
+        select{
+        width: 600px;
+        border: gray 1px solid;
+        resize: none;
+        padding: 8px;
+        }
+        select{
+            width: 618px;
+        }
+        textarea{
+            height: 100px;
+        }
+        .pointers{
+            border: 1 rgb(233, 68, 68);
+        }
+        #pdlab{
+            height: 100px;
+            vertical-align: top;
+        }
+
+    #addprodbtn, #selimgsbtn{
+        float: right;
+        margin-left: 10px;
+    }
+    #controldiv{
+        width: 740px;
+    }
+    #loadlab{
+        width: 200px;
+    }
+    .imgs{
+        height: 80px;
+        width: 100px;
+       margin: 5px;
+        border: 1px black dashed;
+    }
+    .Box{
+        padding-top: 150px;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    right: 40%;
+    bottom: 50%;
+    transform: translate(-50%, -50%);
+        height: 300px;
+    width: 1100px;
+    text-align: center;
+    }
+      
+    body{
+        font-family: 'Poppins', sans-serif;
+        
+    }
+</style>
+
+</head>
+    <body>
+        <div class="Box">
+<H2>Upload Product</H2>
+
+        <label>Product Name</label> <input type="text" id="nameinp"> <br><br>
+         <label>Product Price</label> <input type="text" id="priceinp"><br><br>
+        <label>Stock (Quantity)</label> <input type="text" id="stockinp"><br><br>
+
+        <label>Category</label>
+
+        <select id="catinp"><br><br>
+            <option value="Electronic Devices">Electronic Devices</option>
+            <option value="Electronic Accessories">Electronic Accessories</option>
+            <option value="Tv & Home Appliances">Tv & Home Appliances</option>
+            <option value="Beauty Products">Beauty Products</option>
+            <option value="Babies & toys">Babies & toys</option>
+           <option value="Groceries">Groceries</option>
+           <option value="Women's Clothing">Women's Clothing</option>
+           <option value="Men's Clothing">Men's Clothing</option>
+           <option value="Kids's Clothing">Kids's Clothing</option>
+            <option value="Home&Living">Home & Living</option>
+        </select><br><br>
+    
+
+        <label id="pdlab">Product Description</label> <textarea id="desarea"></textarea><br><br> 
+
+        <div id="imagesDiv"></div>
+
+        <div id="controldiv">
+      <label></label>  <label id="loadlab">uploading 1 of 3</label>
+        <button id="addprodbtn">Add Product</button>
+        <button id="selimgsbtn">Select Images</button>
+        </div>
+</div>
+<script type="module">
+
+
+document.getElementById("Backbtn").addEventListener("click", function() {
+  window.location.href = "profile.html";
+});
+
+    var Files = [];
+    var FileReaders = [];
+    var ImageLinksArray = [];
+
+    const imgdiv = document.getElementById('imagesDiv'); 
+    const selBtn = document.getElementById('selimgsbtn'); 
+    const addBtn = document.getElementById('addprodbtn'); 
+    const proglab = document.getElementById('loadlab'); 
+
+    const name = document.getElementById('nameinp'); 
+    const category = document.getElementById('catinp'); 
+    const description = document.getElementById('desarea'); 
+    const price = document.getElementById('priceinp'); 
+    const stock = document.getElementById('stockinp'); 
+
+    let randomString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+
+
+function OpenFileDialog(){
+let inp = document.createElement('input');
+inp.type = 'file';
+inp.multiple='multiple';
+
+inp.onchange = (e) => {
+AssignImgsToFilesArray(e.target.files);
+CreateImgTags();
+}
+inp.click();
+
+}
+
+function AssignImgsToFilesArray(thefiles){
+    let num = Files.length + thefiles.length;
+    let looplim = (num <= 10) ? thefiles.length : (10-Files.length);
+
+    for(let i = 0; i < looplim; i++){
+Files.push(thefiles[i]);
+    }
+    if(num>10) alert("10 Maximum allowed");
+}
+    
+function CreateImgTags(){
+    
+    imgdiv.innerHTML="";
+    imgdiv.classList.add('imagesDivStyle'); 
+
+    for (let i = 0; i < Files.length; i++){
+        FileReaders[i] = new FileReader();
+
+        FileReaders[i].onload = function(){
+            var img = document.createElement("img");
+            img.id = 'imgNo' + i;
+            img.classList.add('imgs');
+            img.src= FileReaders[i].result;
+            imgdiv.append(img);
+        }
+
+FileReaders[i].readAsDataURL(Files[i]);
+    }
+    /*
+    let lab = document.getElementById('label');
+    lab.innerHTML = 'clear images';
+    lab.style = 'cursor:pointer;display:block;color:navy;font-size:12px';
+    lab.addEventListener('click', ClearImages);
+    imgdiv.append(lab); 
+    */
+}
+
+function ClearImages() {
+    files = [];
+    ImageLinksArray = []; 
+    imgdiv.innerHTML='';
+    imgdiv.classList.remove('imagesDivStyle');
+}
+
+//Events 
+function getShortTitle(){
+    let namey = randomString;
+return namey.toLowerCase();
+}
+
+function GetImgUploadProgress(){
+    return 'Images Uploaded' + ImageLinksArray.length + 'of' + Files.length;
+}
+
+    function IsAllImagesUploaded(){
+        return ImageLinksArray.length == Files.length; 
+    }
+
+function RestoreBack(){
+    selBtn.disabled = false;
+    addBtn.disabled = false;
+}
+ 
+//buttons
+selBtn.addEventListener('click', OpenFileDialog);
+addBtn.addEventListener('click', UploadAllImgs);
+
+
+//push img to firebase
+
+function UploadAllImgs(){
+    selBtn.disabled = true;
+    addBtn.disabled = true;
+
+ImageLinksArray=[];
+
+    for(let i = 0; i < Files.length; i++) {
+UploadAnImg(Files[i], i);
+    }
+}
+
+function UploadAnImg(imgToUpload, imgNo){
+const metadata = {
+contentType: imgToUpload.type
+};
+
+const storage = getStorage();
+
+const ImageAddress="TheImages/"+ getShortTitle()+"/img#"+ (imgNo+1);
+
+const storageRef = sRef(storage, ImageAddress);
+
+const UploadTask = uploadBytesResumable(storageRef, imgToUpload, metadata);
+
+UploadTask.on('state_changed', (snapshot) =>{
+proglab.innerHTML = GetImgUploadProgress();
+},
+
+(error)=>{
+alert("error: image upload failed")
+},
+
+()=>{
+    getDownloadURL(UploadTask.snapshot.ref).then((DownloadURL) =>{
+ImageLinksArray.push(DownloadURL);
+
+if(IsAllImagesUploaded()){
+    proglab.innerHTML = "All images have been uploaded";
+    UploadAProduct();
+}
+    });
+}
+);
+}
+
+
+//imports
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyB9XhRzkpjkyuAZLaMSxaLQJs7DwwNESmY",
+    authDomain: "tradingo-824d6.firebaseapp.com",
+    databaseURL: "https://tradingo-824d6-default-rtdb.firebaseio.com",
+    projectId: "tradingo-824d6",
+    storageBucket: "tradingo-824d6.appspot.com",
+    messagingSenderId: "273813724823",
+    appId: "1:273813724823:web:5af639aa92782227fe53d2",
+    measurementId: "G-K74SN99P90"
+  };
+
+  const app = initializeApp(firebaseConfig);
+
+  import { getAuth, signInWithEmailAndPassword,  signOut, updateProfile, sendSignInLinkToEmail, onAuthStateChanged }
+   from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js";
+
+   import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-analytics.js";
+
+  import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL}
+  from"https://www.gstatic.com/firebasejs/9.13.0/firebase-storage.js"
+
+  import { getDatabase, get,child, set, ref, update, remove}
+   from "https://www.gstatic.com/firebasejs/9.13.0/firebase-database.js";
+
+   const realdb = getDatabase();
+   const auth = getAuth(app);
+   const dbref = ref(realdb);
+
+   let userUid;
+
+   onAuthStateChanged(auth, (user) => {
+  if (user  == null) {
+    console.log("Not logged in");
+  } else {
+   console.log("logged in");
+   userUid = user.uid;
+   
+   
+  }
+});
+
+
+   function UploadAProduct(){
+    
+get(child(dbref, 'users/' + userUid + '/First_Name/' ))
+    .then((snapshot) =>{
+      let Fname = snapshot.val();
+      get(child(dbref, 'users/' + userUid + '/Last_Name/' ))
+    .then((snapshot) =>{
+      let Lname = snapshot.val();
+
+      let DisplayName = Fname + ' ' + Lname;
+
+      console.log(snapshot.val());
+
+    console.log(userUid);
+    let lowerCaseText = name.value.toLowerCase();
+    set(ref(realdb,"Products/" + getShortTitle()),{
+ProductTitle: lowerCaseText,
+ProductUid: randomString,
+Uploader: DisplayName,
+UploaderUid: userUid,
+Category: category.value,
+Description: description.value,
+Price: price.value,
+Stock: stock.value,
+LinksOfImgsArray: ImageLinksArray
+    });
+});
+});
+
+Swal.fire('Upload success!')
+RestoreBack();
+
+
+   }
+
+
+   function MoveToProducts() {
+  location.replace("products.html")
+}
+</script>
+
+</body>
+</html>

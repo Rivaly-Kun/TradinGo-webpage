@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+   
+    <title id="titleli">
+    </title>
+    <link rel="stylesheet" href="specialstyle.css">
+    
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+
+     <style>
+.chat-container {
+  border-radius: 15px;
+  background-color: rgb(178, 190, 181);
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  height: 600px;
+ 
+}
+
+.chat-box {
+  flex: 1;
+  padding: 20px;
+  overflow-y: scroll;
+}
+
+.message {
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.message p {
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 70%;
+  word-wrap: break-word;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.incoming {
+  align-self: flex-start;
+  background-color: #eee;
+  width: 550px;
+}
+
+.outgoing {
+    float: right;
+    align-self: flex-end;
+    background-color: #FF7E57;
+    color: white;
+    width: 550px;
+}
+
+.input-box {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #f4f4f4;
+}
+
+.input-box input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.input-box button {
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  background-color: #0084ff;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+#productsDiv{
+                display: flex;
+                flex-wrap: wrap;
+                padding-left: 160px;
+            }
+            
+                .productcard{
+                    border: 1px black solid;
+                    height: 570px;
+                    width: 290px;
+                    margin: 20px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    flex-direction: column;
+                    border-radius: 10px;
+                    transition: border-color .3s;
+                    padding: 10px;
+                }
+                .productcard:hover{
+                    border-color: rgb(233, 68, 68);
+                }
+                .thumb{
+                    width: 260px;
+                    height: 160px;
+                    cursor: pointer;
+                }
+                .detbtns{
+                    background-color: rgb(233, 68, 68);
+                    color: black;
+                    margin-bottom: 15px;
+                }
+                .detbtns:hover{
+                    background-color: wheat;
+                }
+                .title{
+                    font-size: 16;
+                    font-weight: bold;
+                    cursor: pointer;
+                    padding-left: 5px;
+                    width: 100%;
+                    padding-right: 5px;
+                    text-align: center; 
+            }
+            .points{
+                align-self: flex-start;
+                word-wrap: break-word;
+                height: 192px;
+            }
+
+#points li{
+    list-style-type: circle;
+    padding-left:1em;
+    color:#000000;; /* red bullet */
+}
+
+        #contentsDiv{
+            display: flex;
+            justify-content: center;
+          padding-top: 70px;
+          padding-left: 70px;
+        }
+    
+        #smlimgDiv{
+            display: flex;
+            width: 550px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+            margin-left: 6px;
+        }
+    
+        #imgsDiv,
+         #detailsDiv{
+    height: 500px;
+        
+        }
+        #bigimg{
+            width: 550px;
+            min-height: 300px;
+            max-height: 400px;
+        }
+        .smimgs{
+    height: 80px;
+    width: 100px;
+    border: 1px red solid;
+        }
+    .breadcrumb{
+        background-color: transparent;
+        border: 1px lightgray solid;
+        font-size: 12px;
+        color: darkgrey;
+        margin-top: 10px;
+    }
+    .breadcrumb-item, .breadcrumb-item a{
+    color: darkblue !important;
+    font-weight: bold;
+    }
+    .active{
+        color: black;
+        font-weight: normal;
+    }
+    #detailsDiv{
+        width: 300px;
+        height: 300px;
+       padding-left: 30px;
+       padding-bottom: 50px;
+    }
+    #title{
+        font-style: bold;
+        word-wrap: break-word;
+        font-size: large;
+        padding-bottom: 20px;
+    }
+    #description{
+text-align: center;
+        border-radius: 10px;
+        border:1px dashed black;
+        padding-top: 25px;
+        padding-bottom: 25px;
+    }
+    #tradeable{
+        padding-top: 20px;
+        padding-bottom: 15px;  
+    }
+    ul{
+        padding-bottom: 10px;
+    }
+    
+    </style>
+
+    </head>
+<body>
+<!--- header ni boy --->
+<div class="container">
+<div class="navbar">
+    <div>
+        <!---logo put maya here --->
+        <img src="images/LogoForNavBar.png"  width="125px" >
+    </div>
+    <nav>
+        <ul id="MenuItems">
+          <li><a href="TradinGo.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+         <li><a href="Profile.html">Profile</a></li>
+         <li><a href="MessageList.html">Messages</a></li>         
+        
+          <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+    <div class="carticonPad">
+    <img id="TradeIcon" src="images/cartIcon.png" width="40px" height="40px">
+</div>
+<i id="BellIcon" class="fa fa-bell" style="font-size:24px"></i>
+<img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
+ </div>
+</div>
+
+
+<div class="chat-container">
+  <div class="chat-box" id="chat-box">
+    
+    
+  </div>
+  <div class="input-box">
+    <input type="text" placeholder="Type your message..." id="InputMsg">
+    <button id="SendBtn">Send</button>
+  </div>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyB9XhRzkpjkyuAZLaMSxaLQJs7DwwNESmY",
+    authDomain: "tradingo-824d6.firebaseapp.com",
+    databaseURL: "https://tradingo-824d6-default-rtdb.firebaseio.com",
+    projectId: "tradingo-824d6",
+    storageBucket: "tradingo-824d6.appspot.com",
+    messagingSenderId: "273813724823",
+    appId: "1:273813724823:web:5af639aa92782227fe53d2",
+    measurementId: "G-K74SN99P90"
+  };
+
+  const app = initializeApp(firebaseConfig);
+
+  import { getAuth, signInWithEmailAndPassword,  signOut, updateProfile, sendSignInLinkToEmail, onAuthStateChanged }
+   from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js";
+
+   import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-analytics.js";
+
+  import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL}
+  from"https://www.gstatic.com/firebasejs/9.13.0/firebase-storage.js"
+
+  import { getDatabase, get,child, set, ref, update, remove}
+   from "https://www.gstatic.com/firebasejs/9.13.0/firebase-database.js";
+
+ const realdb = getDatabase();
+  
+
+  const dbref = ref(realdb);
+    const auth = getAuth(app);
+
+
+let UserName = [];
+    let product = null;
+
+
+    window.onload = function(){
+        product = localStorage.Product;
+        if(product){
+            product=JSON.parse(product);
+           // LoadProduct();
+            
+        }
+    }
+
+    function LoadProduct(){
+
+        document.getElementById('Original_Poster').innerHTML = " Product Owner "  +product.Uploader;
+        document.getElementById('titleli').innerHTML = product.ProductTitle;
+        document.getElementById('bigimg').src = product.LinksOfImgsArray[0];
+        document.getElementById('title').innerHTML = product.ProductTitle;
+        document.getElementById('description').innerHTML = product.Description;
+        document.getElementById('tradeable').innerHTML = "Market Value ₱" + product.Price;
+        if(product.Stock < 1)document.getElementById('btnDiv').innerHTML = '<h3 class="text-warning"> Out of stock</h3>';
+    
+        GenImgs();
+    }
+
+
+
+function GenImgs(){
+    let  i = 1; 
+    let html = '';
+
+    product.LinksOfImgsArray.forEach(imglink =>{
+        let img = document.createElement('img');
+        img.src = imglink;
+        img.classList.add("smimgs","mr-2","mb-2");
+        img.id = "im" + (i++);
+        img.addEventListener('click', ChangeBigImg);
+        document.getElementById('smlimgDiv').append(img);
+    });
+}
+
+function ChangeBigImg(event){
+let elem = document.getElementById(event.target.id);
+document.getElementById('bigimg').src = elem.src;
+}
+  
+function getShortTitle(title){
+                if(title.length > 49) title.substring(0, 47);
+                else return title;
+                return title + "...";
+            }
+        
+        //imports
+        
+        var OuterDiv = document.getElementById('chat-box');
+        var ArrayOfProducts = [];
+        window.addEventListener('load', GetAllProducts);
+        
+
+        function GetAllProducts() {
+            const auth = getAuth(app);
+            onAuthStateChanged(auth, (user) => {
+
+      let  userUid = user.uid;
+
+        //console.log(userUid);
+            const dbref = ref(realdb);
+        
+            get(child(dbref, 'users/'+ userUid + '/Messages/' + product.UploaderUid + '/msg/'))
+            .then((snapshot) =>{
+
+                snapshot.forEach(prod =>{
+        ArrayOfProducts.push(prod.val());
+        const jsonString = JSON.stringify(snapshot);
+      //  console.log(jsonString);
+
+                });
+        
+                AddAllProducts();
+
+            })
+
+        })
+
+        }
+        
+        
+        function AddAllProducts(){
+            let i = 0;
+        
+            ArrayOfProducts.forEach(prod =>{
+        AddAProduct(prod, i++);
+            });
+           
+        }
+        
+        function AddAProduct(product, index){
+
+            onAuthStateChanged(auth, (user) => {
+            let  userId = user.uid;
+ console.log(userId);
+
+            if(product.Sender == userId){
+                let html = 
+            `
+
+                <div class="message outgoing" id="myElement">
+      <p>`+ product.Messages +`</p>
+    </div>
+                
+                       
+            `
+
+            let newProd = document.createElement("div");
+           
+           newProd.innerHTML = html;
+           OuterDiv.append(newProd);
+            }
+
+            else{
+                 let html = 
+            `
+
+                <div class="message incoming" id="myElement">
+      <p>`+ product.Messages +`</p>
+    </div>
+                
+                       
+            `
+              let newProd = document.createElement("div");
+           
+            newProd.innerHTML = html;
+            OuterDiv.append(newProd);
+            }
+           
+           
+        
+          
+        });
+        }
+ 
+  //detects the shits pressed
+  document.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    myFunction();
+  }
+});
+
+document.getElementById("SendBtn").addEventListener("click", function() {
+  myFunction();
+});
+
+        function myFunction() {
+            onAuthStateChanged(auth, (user) => { 
+          //ihap sa shits 
+var totalNum = ArrayOfProducts.length;
+    var ohmylogs = totalNum + 1;
+    console.log(ohmylogs);
+
+ // Increment ohmylogs before using it in update functions
+ 
+        console.log(ohmylogs);
+        
+var  userId = user.uid;
+    console.log(userId);
+
+    get(child(dbref, 'users/' + userId + '/First_Name/' ))
+    .then((snapshot) =>{
+      let Fname = snapshot.val();
+      get(child(dbref, 'users/' + userId + '/Last_Name/' ))
+    .then((snapshot) =>{
+      let Lname = snapshot.val();
+
+      let DisplayName = Fname + ' ' + Lname;
+        
+
+
+        let addtxt = document.getElementById("InputMsg");
+        let lowdy = addtxt.value;
+        let html = `
+          <div class="message outgoing" id="myElement" >
+            <p>`+ lowdy +`</p>
+          </div>
+        `;   
+        let newProd = document.createElement("div");
+        newProd.innerHTML = html;
+        OuterDiv.append(newProd);
+
+        let randomString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        
+       
+        update(ref(realdb,'users/'+ userId + '/Messages/' + product.UploaderUid + "/msg/" + ohmylogs), { //mao ni si uploader
+          Messages:lowdy,
+          Sender:userId,
+          Reciever: product.UploaderUid
+        }); 
+
+        update(ref(realdb,'users/'+ product.UploaderUid + '/Messages/' + userId + "/msg/" +  ohmylogs ), { //mao ni si uploader
+          Messages:lowdy,
+          Sender:userId,
+          Reciever: product.UploaderUid
+        }); 
+
+        //username
+        update(ref(realdb,'users/'+ userId + '/Messages/' + product.UploaderUid), { //mao ni si uploader
+          UserName: product.Uploader,
+          Reciever: product.UploaderUid,
+          Sender:userId
+        }); 
+
+        update(ref(realdb,'users/'+ product.UploaderUid + '/Messages/' + userId), { //mao ni si uploader
+          UserName: DisplayName ,
+          Reciever: userId,
+          Sender:product.UploaderUid
+        }); 
+
+        let inputElement = document.getElementById("InputMsg");
+        inputElement.value = "";
+
+        location.reload();
+      });
+      });
+  });
+}
+
+
+
+
+        function GenerateStockLabel(stock){
+        let stocklabel = document.createElement('h5');
+        stocklabel.classList.add('stock');
+        
+        if (stock > 0){
+            stocklabel.innerHTML='In stock';
+            stocklabel.classList.add('text-success');
+        }
+        else{
+            stocklabel.innerHTML='Out of stock';
+            stocklabel.classList.add('text-warning');
+        }
+        return stocklabel.outerHTML;
+        }
+        
+        
+        function GetProductIndex(id){
+            var indstart = id.indexOf('-') + 1;
+            var indend = id.length;
+            return Number(id.substring(indstart, indend));
+        }
+        
+        function GoToProductDetails(event){
+        var index = GetProductIndex(event.target.id);
+        localStorage.Product = JSON.stringify(ArrayOfProducts[index]);
+        window.location = "products-details.html";
+        }
+        
+      
+</script>
+
+
+<!--Toggle for js menu shits-->
+<script>
+
+
+
+    var MenuItems = document.getElementById("MenuItems");
+
+    MenuItems.style.maxHeight = "0px";
+
+    function menutoggle(){
+        if(MenuItems.style.maxHeight == "0px"){
+            MenuItems.style.maxHeight = "200px";
+        }
+        else{
+            MenuItems.style.maxHeight = "0px";
+        }
+    }
+</script>
+
+
+
+
+
+</body>
+</html>

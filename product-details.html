@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+   
+    <title>
+    Notifications - TradinGo
+    </title>
+    <link rel="stylesheet" href="specialstyle.css">
+    <script src="
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js
+    "></script>
+    <link href="
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css
+    " rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+        
+<!--- header ni boy --->
+<div class="container">
+<div class="navbar">
+    <div>
+        <!---logo put maya here --->
+        <img src="images/LogoForNavBar.png"  width="125px" >
+    </div>
+    <nav>
+        <ul id="MenuItems">
+            <li><a href="TradinGo.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+           <li><a href="Profile.html">Profile</a></li>
+           <li><a href="MessageList.html">Messages</a></li>         
+          
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+    <div class="carticonPad">
+    <img src="images/cartIcon.png" id="TradeIcon" width="40px" height="40px">    
+</div>
+<i id="BellIcon" class="fa fa-bell" style="font-size:24px"></i>
+<img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
+ </div>
+</div>
+
+<style>
+    
+    #contentsDiv{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #smlimgDiv{
+        display: flex;
+        width: 550px;
+        margin-top: 10px;
+        flex-wrap: wrap;
+        margin-left: 6px;
+    }
+
+    #imgsDiv,
+     #detailsDiv{
+height: 500px;
+    }
+    #bigimg{
+        width: 550px;
+        min-height: 300px;
+        max-height: 400px;
+    }
+    .smimgs{
+height: 80px;
+width: 100px;
+border: 1px red solid;
+    }
+.breadcrumb{
+    background-color: transparent;
+    border: 1px lightgray solid;
+    font-size: 12px;
+    color: darkgrey;
+    margin-top: 10px;
+}
+.breadcrumb-item, .breadcrumb-item a{
+color: darkblue !important;
+font-weight: bold;
+}
+.active{
+    color: black;
+    font-weight: normal;
+}
+#detailsDiv{
+    width: 300px;
+}
+#title{
+    word-wrap: break-word;
+    padding-bottom: 20px;
+    font-style: bold;
+}
+ #description{
+    word-wrap: break-word;
+    padding-bottom: 20px;
+    border: 2px dashed black;
+    text-align: center;
+ }
+ #tradeable{
+    word-wrap: break-word;
+    padding-bottom: 20px;
+    font-style: bold;
+ }
+ #DeclineBtn{
+    background-color: red !important;
+ }
+ #Tradebtn{
+    background-color: green;
+ }
+</style>
+
+</head>
+
+    <div class="container"> 
+ 
+
+<div id="contentsDiv">
+    <div id="imgsDiv" class="mr-5">
+      <div id="bigimgDiv">
+        <img id="bigimg"src="" alt="">
+    </div>
+
+    <div id="smlimgDiv">
+        
+    </div>
+</div>
+<div id="detailsDiv">
+    <h4 id="title"></h4>
+    <p id="description"></p>
+    <h3 id="tradeable"></h3>
+    <div id="btndiv" class="mt-3">
+        <button id="DeclineBtn"class="btn btn-lg btn-warning mr-2">Decline</button>
+        <button class="btn btn-lg btn-primary mr-2" id="Tradebtn" >Accept</button>
+    </div>
+</div>
+</div>
+</div>
+
+<script type="module">
+const selBtn = document.getElementById('Tradebtn'); 
+selBtn.addEventListener('click', TradeAct);
+
+const delbtn = document.getElementById('DeclineBtn'); 
+delbtn.addEventListener('click', DeclineAct );
+
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyB9XhRzkpjkyuAZLaMSxaLQJs7DwwNESmY",
+    authDomain: "tradingo-824d6.firebaseapp.com",
+    databaseURL: "https://tradingo-824d6-default-rtdb.firebaseio.com",
+    projectId: "tradingo-824d6",
+    storageBucket: "tradingo-824d6.appspot.com",
+    messagingSenderId: "273813724823",
+    appId: "1:273813724823:web:5af639aa92782227fe53d2",
+    measurementId: "G-K74SN99P90"
+  };
+
+  const app = initializeApp(firebaseConfig);
+
+  import { getDatabase, update,remove, set, ref, child, get}
+   from "https://www.gstatic.com/firebasejs/9.13.0/firebase-database.js";
+
+   import { getAuth, signInWithEmailAndPassword,  signOut, updateProfile, sendSignInLinkToEmail, onAuthStateChanged }
+   from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js";
+
+   const realdb = getDatabase();
+   const dbref = ref(realdb);
+   const auth = getAuth(app);
+
+    let product = null;
+    let Trader1 = [];
+    let Trader2 = [];
+let UserUid = [];
+    
+    window.onload = function(){
+        product = localStorage.Product;
+        if(product){
+            product=JSON.parse(product);
+            LoadProduct();
+            console.log(product.Sender);
+
+            let DisUser = product.UploaderUid;
+
+            const omay = ref(realdb, 'users/' + DisUser + '/Notification' + '/notif'+ ':' + product.NotificationNo)
+    console.log(omay);
+    
+       
+        }
+    }
+
+
+    
+
+    document.getElementById('TradeIcon').addEventListener('click', function() {
+ 
+ onAuthStateChanged(auth, (user) => {
+ if (user  == null) {
+   window.location = 'account.html';
+ } else {
+  window.location = 'Transactions.html';
+ }
+});
+});
+
+
+document.getElementById('BellIcon').addEventListener('click', function() {
+ onAuthStateChanged(auth, (user) => {
+ if (user  == null) {
+   window.location = 'account.html';
+ } else {
+  window.location = 'Notifications.html';
+ }
+});
+});
+
+
+    function LoadProduct(){
+        document.getElementById('bigimg').src = product.LinksOfImgsArray[0];
+        document.getElementById('title').innerHTML = product.ProductTitle;
+        document.getElementById('description').innerHTML = product.Description;
+        document.getElementById('tradeable').innerHTML = "Market Value ₱" + product.Price;
+        if(product.Stock < 1)document.getElementById('btnDiv').innerHTML = '<h3 class="text-warning"> Out of stock</h3>';
+        
+        GenImgs();
+    }
+ 
+//dapat ma delete ang notification
+function DeclineAct(){
+
+    let DisUser = product.UploaderUid;
+
+ remove(child(dbref, 'users/' + DisUser + '/Notification' + '/notif'+ ':' + product.NotificationNo))
+    .then((snapshot) =>{
+        Swal.fire('Trade Declined')
+        console.log(DisUser);
+        console.log(product.NotificationNo)
+        
+        setTimeout(function() {
+  console.log("3 seconds have passed.");
+ window.location='Notifications.html';
+}, 3000);
+        });
+   
+}
+
+    function TradeAct(){ 
+        let DisUser = product.UploaderUid;
+        let Trader1 = product.Sender;
+        let Trader2 = product.UploaderUid;
+        let ProdDel = product.WantItem;
+        let Notif = product.NotificationNo;
+    let randomString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+update(ref(realdb,'users/' + Trader1 + '/Trades'+ '/Pending_Trade' + '/Pending'+ ':' + randomString),{ //mao ni si sender
+    Trader:product.ProductUploader,
+Uploader:product.ProductTrader,
+TraderUid: product.Sender,
+TransActNo: randomString,
+TraderCreatorUid: product.UploaderUid,
+ProductTraded: product.ProductTitle,
+ProductTitle: product.WantItem,
+ProductUid: product.ProductUid
+    });
+    update(ref(realdb,'users/' + Trader2 + '/Trades'+ '/Pending_Trade' + '/Pending'+ ':' + randomString),{ //mao ni si uploader
+Trader:product.ProductTrader,
+Uploader:product.ProductUploader,
+TraderUid: product.Sender,
+TransActNo: randomString,
+TraderCreatorUid: product.UploaderUid,
+ProductTraded: product.WantItem,
+ProductTitle: product.ProductTitle,
+ProductUid: product.ProductUid
+    }); 
+
+    //dapat notif sa user ma delete na
+
+ remove(child(dbref, 'users/' + DisUser + '/Notification' + '/notif'+ ':' + product.NotificationNo))
+    .then((snapshot) =>{
+        Swal.fire('Trade Accepted')
+        console.log(DisUser);
+        console.log(product.NotificationNo)
+        setTimeout(function() {
+  console.log("3 seconds have passed.");
+   window.location='Notifications.html';
+}, 3000);
+      
+        });
+   }
+
+
+    function GenLi(){
+        product.Points.forEach(html =>{
+            if(html.length> 1){
+                var li = document.createElement('li');
+                li.innerHTML = html;
+document.getElementById('points').append(li);
+            }
+        });
+    }
+
+function GenImgs(){
+    let  i = 1; 
+    let html = '';
+
+    product.LinksOfImgsArray.forEach(imglink =>{
+        let img = document.createElement('img');
+        img.src = imglink;
+        img.classList.add("smimgs","mr-2","mb-2");
+        img.id = "im" + (i++);
+        img.addEventListener('click', ChangeBigImg);
+        document.getElementById('smlimgDiv').append(img);
+    });
+}
+
+function ChangeBigImg(event){
+let elem = document.getElementById(event.target.id);
+document.getElementById('bigimg').src = elem.src;
+}
+
+</script>
+
+</body>
+</html>

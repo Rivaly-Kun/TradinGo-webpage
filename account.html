@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initital- scale=1">
+   
     <title>
      All Products - TradinGo
     </title>
@@ -28,16 +28,18 @@
     </div>
     <nav>
         <ul id="MenuItems">
-            <li><a href="TradinGo.html">Home</a></li>
-            <li><a href="products.html">Products</a></li>
-            <li><a href="account.html">Messages</a></li>
-            <li><a href="accProfile.html">Account</a></li>
-            <li><a href="about.html">About</a></li>
+          <li><a href="TradinGo.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+         <li><a href="Profile.html">Profile</a></li>
+         <li><a href="MessageList.html">Messages</a></li>         
+        
+          <li><a href="about.html">About</a></li>
         </ul>
     </nav>
     <div class="carticonPad">
     <img src="images/cartIcon.png" width="40px" height="40px">
 </div>
+<i id="BellIcon" class="fa fa-bell" style="font-size:24px"></i>
 <img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
  </div>
 </div>
@@ -57,7 +59,10 @@
 </div>
 <form id="LoginForm">
     <input type="text" placeholder="Email" id="emailLogin" >
+
     <input type="password" placeholder="Password" id="passwordLogin" >
+    <input type="checkbox" id="TogglePass" onclick="TogglepassLogin()">Show Password
+
     <button type="button" id="submitDataLogin" class="btn">Log in</button>
     <a href="">Forgot password</a>
 </form>
@@ -67,6 +72,7 @@
     <input type="text" placeholder="Last Name" id="lname">
     <input type="email" placeholder="Email" id="email">
     <input type="password" placeholder="Password" id="password">
+    <input type="checkbox" id="TogglePass" onclick="Togglepass()">Show Password
     <button type="button" id="submitData" name="submitData" class="btn">Register</button>
 </form>
 
@@ -115,6 +121,30 @@
         <p class="copyright">Copyright 2022 - TradinGo</p>
     </div>
 </div>
+
+<!--show pass-->
+<script>
+    function Togglepass() {
+      var x = document.getElementById("password");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
+    </script>
+
+<script>
+      function TogglepassLogin() {
+      var y = document.getElementById("passwordLogin");
+      if (y.type === "password") {
+        y.type = "text";
+      } else {
+        y.type = "password";
+      }
+    }
+</script>
+
 
 <!--Toggle for js menu shits-->
 <script>
@@ -184,9 +214,11 @@ function login(){
   const app = initializeApp(firebaseConfig);
   const auth = getAuth();
   const database = getDatabase();
+  const realdb = getDatabase();
 
 
-//detect if user is logged in
+/*
+detect if user is logged in
 onAuthStateChanged(auth, (user) => {
   if (user) {
     swal({
@@ -194,18 +226,18 @@ text: 'You are already logged in',
 type: "success",
 timer: 3000
 })
-  window.location.href = "chatlistpage.html";
+  window.location.href = "TradinGo.html";
     const uid = user.uid;
   } else {
     swal({
-title: 'You are not logger in!',
-imageUrl: 'images/incorrect.png',
+title: 'Pls Sign Up!',
+
   imageHeight: 1500,
-text: (error),
+
 })
   }
 });
-
+*/
 
 
   submitData.addEventListener('click', (e) => {
@@ -215,6 +247,7 @@ text: (error),
 var password = document.getElementById('password').value;
 createUserWithEmailAndPassword(auth, email, password)
 .then((userCredential) => {
+  
 // Signed in 
 const user = userCredential.user;
 // ...
@@ -223,32 +256,26 @@ var today = new Date();
 var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 var sgdate = date+' '+time;
-set(ref(database, 'users/' + user.uid), {
-  
-Full_Name: fullName,
-Date_created: sgdate,
-});
 
-swal({
-title: "Registration successful",
-text: 'You can now Log in to your account!',
-type: "success",
-timer: 2000,
-showConfirmButton: true
-}, function(){
-    //RegForm.style.transform = "translateX(300px)";
-    //LoginForm.style.transform = "translateX(300px)";
-    //Indicator.style.transform = "translateX(0px)";
-});
-      })
-      .catch((error) => {
-          swal({
-title: 'Oops!',
-imageUrl: 'images/incorrect.png',
-  imageHeight: 1500,
-text: (error),
+set(ref(realdb,'users/'+ user.uid), { 
+  First_Name: fname,
+Last_Name: lname,
+Date_created: sgdate,
+email: email,
+UserUid: user.uid,
+Pfp:"https://firebasestorage.googleapis.com/v0/b/tradingo-824d6.appspot.com/o/Pfp%2Fdefault.jpg?alt=media&token=f9ff1cb9-6c5a-4987-adff-05eb9f4d5d46"
+        }).then (() => {
+
+window.location.href = "TradinGo.html";
 
 })
+
+
+
+      })
+      .catch((error) => {
+         console.log(error);
+
   })
 
 });
@@ -270,23 +297,14 @@ var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds(
 var dateTime = date+' '+time;
 
 update(ref(database, 'users/' + user.uid), {
-
 last_login:dateTime,
 })
 
 
 .then (() => {
 
+  window.location.href = "TradinGo.html";
 
-swal({
-title: "Login successful",
-text: 'Enjoy Shopping!',
-type: "success",
-timer: 2000,
-showConfirmButton: false
-}, function(){
-window.location.href = "TradinGo.html";
-});
 })
 
     })

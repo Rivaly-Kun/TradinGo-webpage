@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+   
+    <title>
+    Product Admin - TradinGo
+    </title>
+    <link rel="stylesheet" href="specialstyle.css">
+
+    <script src="
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js
+    "></script>
+    <link href="
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css
+    " rel="stylesheet">
+    
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+        
+<!--- header ni boy --->
+<div class="container">
+    <div class="navbar">
+        <div>
+            <!---logo put maya here --->
+            <img src="LogoForNavBar.png"  width="125px" >
+        </div>
+        <nav>
+            <ul id="MenuItems">
+                <li><a href="AdminPanel.html">Users</a></li>
+                <li><a href="ProductAdmin.html">Products</a></li>
+                <li><a href="ActivityRep.html">Activity</a></li>
+                <li><a href="TransActions.html">Transactions</a></li>
+                <li><a href="ReportPage.html">Reports</a></li>
+                <li><a href="" id="LogOut" style="color: red;">Logout</a></li>
+
+            </ul>
+        </nav>
+        
+</div>
+
+</head>
+
+<style>
+ 
+ .detbtns{
+    display: inline-block;
+    background: red;
+    color: #fff;
+    padding: 8px 20px;
+    margin: 30px 0;
+    transition: background 0.5s;
+    border-radius: 12px;
+ 
+}
+.delbtnz{
+  display: inline-block;
+    background: green;
+    color: #fff;
+    padding: 8px 20px;
+    margin: 30px 0;
+    transition: background 0.5s;
+    border-radius: 12px;
+}
+.productcard {
+  background-color: rgba(255, 255, 255, 0.10);
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  padding: 20px;
+  width: max-content;
+  gap: 5px; /* Adjust the spacing as needed */
+}
+
+.productcard > :first-child {
+  margin-left: 10px; 
+}
+.productcard > :nth-child(2) {
+  margin-left: 26px; /* Adjust the margin as needed */
+}
+
+
+
+.PTagDv {
+  margin: 0 100px;
+  padding-bottom: 10px;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  overflow: hidden;
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 1px; /* Adjust the spacing as needed */
+}
+
+td {
+  width: 148px; /* Adjust the width as needed */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 5px;
+}
+
+td input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px;
+}
+
+
+
+.PfpImg {
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+    border: 5px solid #fff;
+}
+
+</style>
+<body>
+  
+
+    <table class="table" border="2" style="border-collapse:collapse;">
+
+      <button id="EditBtn" class="Edit btn">Edit</button>
+      
+      <thead>
+        <tr>
+   
+          <th>ProductImg</th>
+          <th>ProductTitle</th>
+          <th>Category</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th>Uploader</th>
+          <th>Action</th>
+      
+
+        </tr>
+      </thead>
+      
+        <tbody id="productsDiv" class="container"> 
+
+
+        </tbody>
+   
+      </table>
+
+        <script>
+            var MenuItems = document.getElementById("MenuItems");
+        
+            MenuItems.style.maxHeight = "0px";
+        
+            function menutoggle(){
+                if(MenuItems.style.maxHeight == "0px"){
+                    MenuItems.style.maxHeight = "200px";
+                }
+                else{
+                    MenuItems.style.maxHeight = "0px";
+                }
+            }
+        </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+<script type="module">
+
+let IdArray = [];
+let userUid;
+let DisplayName;
+
+// Edit Button func
+let buttonClicked = false;
+document.getElementById('EditBtn').addEventListener('click', function() {
+   
+   
+
+buttonClicked = !buttonClicked;
+   /*
+   let originalId = td.id; 
+ IdArray.push(originalId);
+ console.log(IdArray);
+   */
+
+  // Check the value of the boolean variable and log a message to the console
+  if (buttonClicked) {
+  // Get all the td elements in the table
+const tds = document.querySelectorAll('td');
+
+// Loop through each td element
+for (let i = 0; i < tds.length; i++) {
+  // Get the id of the current td element
+  const id = tds[i].getAttribute('id');
+  
+  // Create a new input element
+  const input = document.createElement('input');
+  
+  // Set the type and value attributes of the input element
+  input.type = 'text';
+  input.value = tds[i].innerText;
+  
+  // Set the id attribute of the input element to the id of the original td element
+  input.id = id;
+  
+  // Replace the td element with the input element
+  tds[i].parentNode.replaceChild(input, tds[i]);
+}
+
+$(".detbtns").hide();
+$(".delbtnz").hide();
+$(".PTagDv").show();
+
+
+  } else {
+ 
+   // Get all the input elements in the table
+const inputs = document.querySelectorAll('input');
+
+// Loop through each input element
+inputs.forEach(input => {
+  // Create a new td element
+  const td = document.createElement('td');
+
+  // Copy the id attribute from the input to the td element
+  td.id = input.id;
+
+  // Copy the value from the input to the td element
+  td.textContent = input.value;
+
+  // Replace the input with the new td element
+  input.parentNode.replaceChild(td, input);
+});
+
+$(".detbtns").show();
+$(".delbtnz").show();
+$(".PTagDv").hide();
+
+
+  }
+
+});
+  
+//imports
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyB9XhRzkpjkyuAZLaMSxaLQJs7DwwNESmY",
+    authDomain: "tradingo-824d6.firebaseapp.com",
+    databaseURL: "https://tradingo-824d6-default-rtdb.firebaseio.com",
+    projectId: "tradingo-824d6",
+    storageBucket: "tradingo-824d6.appspot.com",
+    messagingSenderId: "273813724823",
+    appId: "1:273813724823:web:5af639aa92782227fe53d2",
+    measurementId: "G-K74SN99P90"
+  };
+
+  const app = initializeApp(firebaseConfig);
+
+  import { getAuth, signInWithEmailAndPassword,  signOut, updateProfile, sendSignInLinkToEmail, onAuthStateChanged }
+   from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js";
+
+   import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-analytics.js";
+
+  import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL}
+  from"https://www.gstatic.com/firebasejs/9.13.0/firebase-storage.js"
+
+  import { getDatabase, get,child, set, ref, update, remove, onValue}
+   from "https://www.gstatic.com/firebasejs/9.13.0/firebase-database.js";
+
+ const realdb = getDatabase();
+  const dbref = ref(realdb);
+    const auth = getAuth(app);
+
+//tangina namn kinalimutan mo gawin login page sa admin
+
+LogOut.addEventListener('click', (e) => {
+const auth = getAuth();
+signOut(auth).then(() => {
+    window.location.href = "LoginPage.html";
+}).catch((error) => {
+  // An error happened.
+});
+});
+
+
+onAuthStateChanged(auth, (user) => {
+    const dbref = ref(realdb);
+
+ //userId = user.uid;
+ //console.log(userId);
+
+})
+
+var OuterDiv = document.getElementById('productsDiv');
+var ArrayOfProducts = [];
+let myArray = [];
+
+const starCountRef = ref(realdb, 'Products/');
+onValue(starCountRef, (snapshot) => {
+  const data = snapshot.val();
+//console.log(data);
+});
+
+window.addEventListener('load', GetAllProducts);
+
+function GetAllProducts() {
+      
+ //console.log(userUid);
+    get(child(dbref, 'Products'))
+    .then((snapshot) =>{
+//console.log((child(dbref, 'users/')));
+
+let objString = JSON.stringify(snapshot.val());
+
+       myArray.push(objString); 
+
+        snapshot.forEach(prod =>{
+ArrayOfProducts.push(prod.val());
+        });
+      
+
+        AddAllProducts();
+    })
+
+}
+
+function AddAllProducts(){
+    let i = 0;
+
+    ArrayOfProducts.forEach(prod =>{
+AddAProduct(prod, i++);
+    });
+    AssignAllEvents();
+    AssignEvents();
+}
+
+
+
+function AddAProduct(Users, index){
+
+
+    let html = 
+    `
+    <img src="${Users.LinksOfImgsArray[0]}" class="PfpImg" id="PfpImg-${index}">
+    <td id="ProductTitle-`+ index+`">${Users.ProductTitle}</td>
+    <td id="Category-`+ index+`" >${Users.Category}</td>
+    <td id="Description-`+ index+`">${Users.Description}</td>
+    <td id="Price-`+ index+`">${Users.Price}</td>
+    <td id="Stock-`+ index+`">${Users.Stock}</td>
+    <td id="Uploader-`+ index+`">${Users.Uploader}</td>
+   
+
+      <button  id="SaveBtn-`+ index +`" class="detbtns ">Save</button>
+      <button  id="Delbtn-`+ index +`" class="delbtnz">Delete</button>
+    `
+// 
+    let newProd = document.createElement("tr");
+    newProd.classList.add('productcard');
+    newProd.innerHTML = html;
+    OuterDiv.append(newProd);
+
+}
+
+
+function GetProductIndex(id){
+    var indstart = id.indexOf('-') + 1;
+    var indend = id.length;
+    return Number(id.substring(indstart, indend));
+}
+
+function accept(event){
+
+console.log("OSHET MINECRAFT");
+var index = GetProductIndex(event.target.id);
+localStorage.Product = JSON.stringify(ArrayOfProducts[index]);
+console.log(localStorage.Product); 
+let product = localStorage.Product;
+            product=JSON.parse(product);
+console.log(index);
+
+/*
+   <td id="UserUid-`+ index+`">${Users.ProductTitle}</td>
+    <td id="displayName-`+ index+`" >${Users.Category}</td>
+    <td id="email-`+ index+`">${Users.Description}</td>
+    <td id="email-`+ index+`">${Users.Price}</td>
+    <td id="email-`+ index+`">${Users.Stock}</td>
+    <td id="email-`+ index+`">${Users.Uploader}</td>
+    <td id="email-`+ index+`">${Users.UploaderUid}</td>
+*/
+let ProductTitleVar; 
+let CategoryVar;
+let DescriptionVar;
+let PriceVar;
+let StockVar;
+let UploaderVar;
+let UploaderUidVar;
+
+ let ProductTitle = document.getElementById("ProductTitle-" + index);
+ let Category = document.getElementById("Category-" + index);
+ let Description = document.getElementById("Description-" + index);
+ let Price = document.getElementById("Price-" + index);
+ let Stock = document.getElementById("Stock-" + index);
+ let Uploader = document.getElementById("Uploader-" + index);
+ let UploaderUid = document.getElementById("UploaderUid-" + index);
+
+ ProductTitleVar = ProductTitle.textContent;
+ CategoryVar = Category.textContent;
+ DescriptionVar = Description.textContent;
+ PriceVar = Price.textContent;
+ StockVar = Stock.textContent;
+UploaderVar = Uploader.textContent;
+ UploaderUidVar = UploaderUid.textContent;
+
+//add pa admin login tanga ka kaseh
+
+let adminUid = "uQui4AOFERZCqeIY6euTmo4PeB93";
+let ActType = "Edited Product" 
+let randomString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+
+const currentDate = new Date();
+const formattedDate = currentDate.toISOString().slice(0, 19).replace('T', ' ');
+
+update(ref(realdb,'AdminActivity/' + randomString),{ //mao ni si sender
+    ActivityType: ActType,
+    Admin: adminUid,
+TimeDate:formattedDate,
+Edited:product.ProductTitle
+    });
+
+update(ref(realdb,'Products/' + product.ProductUid),{ //mao ni si sender
+    ProductTitle: ProductTitleVar,
+    Category:CategoryVar,
+    Description:DescriptionVar,
+    Price:PriceVar,
+    Stock:StockVar,
+    Uploader:UploaderVar,
+    UploaderUid:UploaderUidVar
+    });
+}
+
+
+//para kung reject
+function reject(event){
+console.log("NoSHet MINECRAFT");
+var index = GetProductIndex(event.target.id);
+localStorage.Product = JSON.stringify(ArrayOfProducts[index]);
+console.log(localStorage.Product);
+let product = localStorage.Product;
+            product=JSON.parse(product);
+
+            let ProductTitleVar; 
+
+            let ProductTitle = document.getElementById("ProductTitle-" + index);
+            ProductTitleVar = ProductTitle.textContent;
+           let prodname = ProductTitleVar;
+
+
+//add pa admin login tanga ka kaseh
+let adminUid = "uQui4AOFERZCqeIY6euTmo4PeB93";
+let ActType = "Delete Product" 
+let randomString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+
+const currentDate = new Date();
+const formattedDate = currentDate.toISOString().slice(0, 19).replace('T', ' ');
+
+update(ref(realdb,'AdminActivity/' + randomString),{ //mao ni si sender
+    ActivityType: ActType,
+    Admin: adminUid,
+TimeDate:formattedDate,
+Deleted:product.ProductTitle
+    });
+
+remove(child(dbref, 'Products/' + product.ProductUid))
+   .then((snapshot) =>{
+       setTimeout(function() {
+  console.log("3 seconds have passed.");
+  window.location.reload();
+}, 3000);
+       
+       });
+  
+}
+
+function AssignAllEvents(){
+    var btns = document.getElementsByClassName("detbtns");
+    var titles = document.getElementsByClassName("titleProd");
+   
+ 
+for (let i = 0; i < btns.length; i++){
+    btns[i].addEventListener('click', accept);
+   
+}
+}
+
+function AssignEvents(){
+    var btnz = document.getElementsByClassName("delbtnz");
+    var titles = document.getElementsByClassName("titleProd");
+   
+ 
+for (let i = 0; i < btnz.length; i++){
+    btnz[i].addEventListener('click', reject);
+}
+}
+</script>
+
+</body>
+</html>
